@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>الوحدة الخامسة: التنظيم الداخلي والحوكمة الإدارية</title>
+
+  <style>
+    :root{
+      /* Consultant-Grade Visual Spec v1.0 */
+      --primary: #0F2A44;
+      --secondary: #3A5F8A;
+      --success: #2F7D5A;
+      --alert: #B23A3A;
+
+      --bg: #F7F9FC;
+      --surface: #FFFFFF;
+      --text: #1F2937;
+      --muted: #6B7280;
+      --border: #E5E7EB;
+
+      --radius: 14px;
+      --shadow: 0 10px 24px rgba(15,42,68,.08);
+      --shadow2: 0 6px 14px rgba(15,42,68,.07);
+
+      --maxw: 1200px;
+      --gap: 18px;
+
+      --font: "Cairo","Tajawal",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+    }
+
+    .wrap{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 26px 18px 36px;
+    }
+
+    /* ===== Header (Card / Cover Block) ===== */
+    .header-card{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 32px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header-card:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(135deg, rgba(15,42,68,.06), rgba(58,95,138,.04));
+      pointer-events:none;
+    }
+    .header-inner{ position:relative; }
+
+    #appTitle{
+      margin:0;
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: .2px;
+      text-align:center;
+    }
+    #appSubtitle{
+      margin: 8px 0 0;
+      font-size: 15px;
+      color: var(--muted);
+      text-align:center;
+    }
+    .header-divider{
+      margin: 18px auto 0;
+      height: 1px;
+      width: min(720px, 92%);
+      background: var(--border);
+    }
+
+    /* ===== Tabs ===== */
+    .tabs{
+      margin-top: 16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .tab-btn{
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--primary);
+      padding: 9px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      transition: background .15s ease, border-color .15s ease;
+    }
+    .tab-btn:hover{
+      background: rgba(15,42,68,.04);
+      border-color: rgba(15,42,68,.20);
+    }
+    .tab-btn[aria-selected="true"]{
+      background: rgba(15,42,68,.08);
+      border-color: rgba(15,42,68,.30);
+      font-weight: 800;
+    }
+
+    /* ===== Layout (Sidebar + Content) ===== */
+    .layout{
+      display:grid;
+      grid-template-columns: 300px 1fr; /* sidebar on the right (RTL) */
+      gap: var(--gap);
+      align-items:start;
+      margin-top: 14px;
+    }
+
+    /* ===== Sidebar ===== */
+    aside{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      padding: 14px;
+      position: sticky;
+      top: 14px;
+    }
+
+    .side-head{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .side-title{
+      margin:0;
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .side-actions{
+      display:flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .btn{
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--primary);
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease;
+    }
+    .btn:hover{
+      background: rgba(15,42,68,.04);
+      border-color: rgba(15,42,68,.20);
+    }
+
+    #sidebarTOC{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    #sidebarTOC a{
+      display:block;
+      padding: 10px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      text-decoration:none;
+      font-size: 13px;
+      transition: background .15s ease, border-color .15s ease;
+    }
+    #sidebarTOC a:hover{
+      background: rgba(15,42,68,.04);
+      border-color: rgba(15,42,68,.20);
+    }
+
+    #sidebarTOC a[aria-current="page"]{
+      background: rgba(15,42,68,.08);
+      border-color: rgba(15,42,68,.30);
+      font-weight: 800;
+    }
+    .side-note{
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ===== Content Cards ===== */
+    main{ min-width: 0; }
+
+    .card{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      padding: 22px 22px 18px;
+      margin-bottom: 14px;
+    }
+    .card h2{
+      margin: 0 0 10px;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--secondary);
+    }
+    .card p{ margin: 10px 0; }
+
+    .badges{ display:flex; flex-wrap:wrap; gap: 8px; margin: 10px 0 8px; }
+    .badge{
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15,42,68,.03);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* ===== Inline Callouts (place where needed) ===== */
+    .callout{
+      margin: 14px 0;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+    .callout .label{
+      font-weight: 900;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .callout ul{ margin:0; padding-right: 18px; }
+
+    .callout-danger{
+      background: rgba(178,58,58,0.08);
+      border-color: rgba(178,58,58,0.25);
+      border-right: 4px solid var(--alert);
+    }
+    .callout-danger .label{ color: #7A1F1F; }
+
+    .callout-success{
+      background: rgba(47,125,90,0.08);
+      border-color: rgba(47,125,90,0.25);
+      border-right: 4px solid var(--success);
+    }
+    .callout-success .label{ color: #1F5B43; }
+
+    .callout-info{
+      background: rgba(58,95,138,0.08);
+      border-color: rgba(58,95,138,0.22);
+      border-right: 4px solid var(--secondary);
+    }
+    .callout-info .label{ color: var(--primary); }
+
+    /* ===== Steps ===== */
+    .steps-title{
+      margin: 16px 0 8px;
+      font-weight: 900;
+      color: var(--primary);
+    }
+    .steps{
+      margin: 0;
+      padding-right: 22px;
+    }
+    .steps li{ margin: 6px 0; }
+
+    /* ===== Tables ===== */
+    table{
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+    th,td{
+      border: 1px solid var(--border);
+      padding: 10px 10px;
+      vertical-align: top;
+    }
+    th{
+      background: rgba(15,42,68,.03);
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    /* ===== Infographic (LAST inside unit) ===== */
+    .infographic{
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .infographic .cap{
+      font-weight: 900;
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+    .infographic img{
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      display:block;
+      background: #fff;
+    }
+    .infographic .hint{ margin-top: 8px; }
+
+    /* ===== Signature Authority Block (in place / end) ===== */
+    .signature-card{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--primary);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      padding: 22px 18px;
+      text-align: center;
+      margin-top: 18px;
+    }
+    .signature-card .label{
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+    .signature-card .name{
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--primary);
+      margin: 0 0 2px;
+    }
+    .signature-card .contact{
+      font-size: 15px;
+      margin: 0;
+      color: var(--text);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 980px){
+      .layout{ grid-template-columns: 1fr; }
+      aside{ position: static; }
+      .header-card{ padding: 22px 18px; }
+      #appTitle{ font-size: 24px; }
+    }
+
+    /* ===== Print ===== */
+    @media print{
+      body{ background:#fff !important; color:#000 !important; }
+      .wrap{ max-width: none; padding: 0; }
+      .layout{ grid-template-columns: 1fr; gap: 0; margin-top: 10px; }
+      aside{ display:none !important; }          /* Sidebar hidden */
+      .tabs{ display:none !important; }          /* Tabs hidden */
+      .header-card{ box-shadow:none !important; }
+      .card,.signature-card{
+        box-shadow:none !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      table{
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      h2, .steps-title{
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+      @page{ size: A4; margin: 14mm; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- HEADER (Anchors for Injection) -->
+    <section class="header-card" aria-label="header">
+      <div class="header-inner">
+        <h1 id="appTitle">عنوان المحتوى التدريبي</h1>
+        <p id="appSubtitle"></p>
+        <div class="header-divider"></div>
+      </div>
+    </section>
+
+    <!-- LAYOUT -->
+    <section class="layout">
+
+      <!-- SIDEBAR -->
+      <aside aria-label="sidebar">
+        <div class="side-head">
+          <p class="side-title">الوحدات</p>
+        </div>
+
+        <div class="side-actions">
+          <button class="btn" id="printBtn" type="button">طباعة PDF</button>
+        </div>
+
+        <ul id="sidebarTOC" aria-label="table of contents"></ul>
+
+        <div class="side-note">* الشريط الجانبي وزر الطباعة يختفيان تمامًا عند الطباعة.</div>
+      </aside>
+
+      <!-- CONTENT -->
+      <main aria-label="content">
+        <div id="contentContainer"></div>
+        <div id="infographicContainer"></div>
+
+        
+
+        <!-- SIGNATURE (Fixed place / end) -->
+        <div class="signature-card" aria-label="signature">
+          <div class="label">تم إعداد هذا المحتوى بواسطة</div>
+          <div class="name">أنس العضيبي</div>
+          <p class="contact">0505530803</p>
+        </div>
+      </main>
+
+    </section>
+  </div>
+
+  <script>
+    /*****************************************************************
+     * Template Data Contract v1.0 (Inline Edition)
+     *
+     * mode: "days" | "modules"   => Tabs labels only
+     * tabs: [{ id, label, sections:[...] }]
+     *
+     * SECTION:
+     * - id, title
+     * - unitName: used for Infographic file: assets/<unitName>.png
+     * - badges: ["Required", ...] (optional)
+     * - steps: [ ... ] (optional)
+     * - bodyHtml: (required) you place inline callouts anywhere here
+     * - infographic: true/false (if true => appended LAST inside the unit)
+     *
+     * Inline callouts (use inside bodyHtml):
+     *  - <div class="callout callout-danger">...</div>
+     *  - <div class="callout callout-success">...</div>
+     *****************************************************************/
+
+    const TEMPLATE_DATA = {
+  "mode": "modules",
+  "title": "الوحدة الخامسة: التنظيم الداخلي والحوكمة الإدارية",
+  "subtitle": "",
+  "tabs": [
+    {
+      "id": "u5",
+      "label": "الوحدة الخامسة: التنظيم الداخلي والحوكمة الإدارية",
+      "sections": [
+        {
+          "id": "u5_main",
+          "title": "الوحدة الخامسة: التنظيم الداخلي والحوكمة الإدارية",
+          "unitName": "الوحدة_الخامسة",
+          "badges": [],
+          "steps": [],
+          "bodyHtml": "<div class=\"callout callout-info\">\n<div class=\"label\">Learning Objectives (Recap)</div>\n<ul>\n<li>فهم أثر التنظيم الداخلي على الاستقرار وتقليل النزاعات.</li>\n<li>إدراك دور الحوكمة في تقليل التسرب الوظيفي.</li>\n<li>ربط الهيكل والوصف الوظيفي بالأداء والمساءلة.</li>\n</ul></div>\n<h3 class=\"steps-title\">Core Content</h3>\n<p>التنظيم الداخلي هو خط الدفاع الأول. يبدأ بـ الهيكل التنظيمي لتحديد السلطة والمسؤولية ومنع التضارب.</p>\n<p>ثم لوائح تنظيم العمل ودليل الإجراءات لضبط الحقوق والواجبات ومسار الجزاءات.</p>\n<p>وأخيرًا الوصف الوظيفي كمرجع لحدود الدور وتقييم الأداء.</p>\n<h3 class=\"steps-title\">قصص تطبيقية وتوضيحية</h3><div class=\"callout callout-info\"><div class=\"label\">قصة إيجابية — أحمد والتحول الإداري</div><p><strong>النظام الذي استندت عليه:</strong> الحوكمة والتحول الرقمي</p><p><strong>القصة:</strong> شاب بدأ كسكرتير مؤقت في مكتب فوضوي، فقام بأرشفة الملفات إلكترونيًا وتنظيم الاجتماعات، مما أدى إلى ترقيته ورفع راتبه من 4 آلاف إلى 22 ألف ريال.</p><p><strong>ماذا نستفيد من القصة:</strong> المبادرة الفردية تصنع فارقًا مهنيًا كبيرًا.</p></div><div class=\"callout callout-danger\">\n<div class=\"label\">تنبيه — معلومات يجب الانتباه لها</div>\n<ul>\n<li>أي إجراء إداري/تقييم أداء دون لوائح ووصف وظيفي معتمد يضعف موقف المنشأة عند النزاع.</li>\n</ul></div>\n<div class=\"callout callout-success\">\n<div class=\"label\">تركيز — نقاط يجب التركيز عليها</div>\n<ul>\n<li>اعتماد الهيكل وتحديثه دوريًا.</li>\n<li>مواءمة الوصف مع الواقع لا المسميات.</li>\n<li>تأهيل القيادات قبل تمكينها.</li>\n</ul></div>\n<h3 class=\"steps-title\">Key Takeaways</h3>\n<ul>\n<li>التنظيم الداخلي دفاع أول قبل القضاء.</li>\n<li>الحوكمة تقلل النزاعات والتسرب.</li>\n<li>القيادة غير المؤهلة خطر عالي.</li>\n<li>الوصف الوظيفي أساس العدالة والاستدامة.</li>\n</ul>",
+          "infographic": true
+        }
+      ]
+    }
+  ]
+};
+
+    const elTitle = document.getElementById("appTitle");
+    const elSubtitle = document.getElementById("appSubtitle");
+    const elTOC = document.getElementById("sidebarTOC");
+    const elContent = document.getElementById("contentContainer");
+    const elInf = document.getElementById("infographicContainer");
+    document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+    const sanitizeId = (id) => String(id).replace(/[^a-zA-Z0-9_-]/g, "_");
+
+    function renderApp(data){
+  elTitle.textContent = data.title || "";
+  elSubtitle.textContent = data.subtitle || "";
+  elSubtitle.style.display = (data.subtitle ? "block" : "none");
+  if (!data.subtitle) { elSubtitle.style.display = "none"; } else { elSubtitle.style.display = "block"; }
+  if (!elSubtitle.textContent.trim()) { elSubtitle.style.display = "none"; }
+  const tab = (data.tabs || [])[0];
+  if (tab){
+    renderContent(tab);
+  }
+  renderTOC();
+}
+
+    function renderTOC(){
+  elTOC.innerHTML = '<li><a href="index.html" >الوحدة الأولى: نظام العمل والهيكل القضائي العمالي</a></li><li><a href="unit2.html" >الوحدة الثانية: إدارة التعاقد والمدد النظامية</a></li><li><a href="unit3.html" >الوحدة الثالثة: الأجور، الاستحقاقات، وحسابات نهاية الخدمة</a></li><li><a href="unit4.html" >الوحدة الرابعة: العمليات الرقمية والمنصات الحكومية</a></li><li><a href="unit5.html" aria-current="page">الوحدة الخامسة: التنظيم الداخلي والحوكمة الإدارية</a></li><li><a href="unit6.html" >الوحدة السادسة: الانضباط الإداري وإدارة المخاطر العمالية</a></li>';
+}
+
+    function makeBadges(badges){
+      if (!badges || !badges.length) return null;
+      const wrap = document.createElement("div");
+      wrap.className = "badges";
+      badges.forEach(txt => {
+        const s = document.createElement("span");
+        s.className = "badge";
+        s.textContent = txt;
+        wrap.appendChild(s);
+      });
+      return wrap;
+    }
+
+    function makeSteps(steps){
+      if (!steps || !steps.length) return null;
+      const title = document.createElement("div");
+      title.className = "steps-title";
+      title.textContent = "التسلسل المنهجي";
+
+      const ol = document.createElement("ol");
+      ol.className = "steps";
+      steps.forEach(s => {
+        const li = document.createElement("li");
+        li.textContent = s;
+        ol.appendChild(li);
+      });
+
+      const wrap = document.createElement("div");
+      wrap.appendChild(title);
+      wrap.appendChild(ol);
+      return wrap;
+    }
+
+    function makeInfographic(unitName){
+      const box = document.createElement("div");
+      box.className = "infographic";
+
+      const cap = document.createElement("div");
+      cap.className = "cap";
+      cap.textContent = "📌 الإنفوجرافيك (Infographic)";
+
+      const img = document.createElement("img");
+      img.alt = "Infographic — " + unitName;
+      img.src = "assets/" + unitName + ".png";
+
+      const hint = document.createElement("div");
+      hint.className = "hint";
+      hint.textContent = "الملف المطلوب: assets/" + unitName + ".png";
+
+      img.addEventListener("error", () => {
+        img.style.display = "none";
+        hint.textContent = "لم يتم العثور على الصورة: assets/" + unitName + ".png";
+      });
+
+      box.appendChild(cap);
+      box.appendChild(img);
+      box.appendChild(hint);
+      return box;
+    }
+
+    function renderContent(tab){
+      elContent.innerHTML = "";
+      (tab.sections || []).forEach(sec => {
+        const card = document.createElement("section");
+        card.className = "card";
+        card.id = sanitizeId(sec.id);
+
+        const h2 = document.createElement("h2");
+        h2.textContent = sec.title;
+        card.appendChild(h2);
+
+        const badges = makeBadges(sec.badges);
+        if (badges) card.appendChild(badges);
+
+        // bodyHtml (Inline callouts live here)
+        const body = document.createElement("div");
+        body.innerHTML = sec.bodyHtml || "";
+        card.appendChild(body);
+
+        // steps (optional)
+        const steps = makeSteps(sec.steps);
+        if (steps) card.appendChild(steps);
+
+        elContent.appendChild(card);
+      });
+
+      // Infographic section (fixed: before signature)
+      const first = (tab.sections || [])[0] || {};
+      const unit = first.unitName || sanitizeId(first.id || tab.id || 'unit');
+      elInf.innerHTML = '';
+      const infCard = document.createElement('section');
+      infCard.className = 'card';
+      infCard.appendChild(makeInfographic(unit));
+      elInf.appendChild(infCard);
+
+    }
+
+
+    renderApp(TEMPLATE_DATA);
+  </script>
+</body>
+</html>
