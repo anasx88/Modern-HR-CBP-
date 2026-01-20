@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>الوحدة السابعة: الوصف الوظيفي - منهج إدارة الموارد البشرية CBP</title>
+
+  <style>
+    :root{
+      --bg:#f0f4f8;
+      --card:#ffffff;
+      --text:#2d3748;
+      --muted:#718096;
+      --border:#cbd5e0;
+      --accent:#4299e1;
+      --accent-light:#bee3f8;
+      --danger-bg:#fff5f5;
+      --danger-border:#feb2b2;
+      --danger-text:#c53030;
+      --closing-bg:#ebf8ff;
+      --closing-border:#90cdf4;
+      --radius:12px;
+      --signature-bg:#edf2f7;
+      --signature-border:#a0aec0;
+      --expert-box-bg:#f3e8ff;
+      --expert-box-border:#a78bfa;
+      --story-box-bg:#fffbeb;
+      --story-box-border:#fcd34d;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+    }
+    a{color:inherit;text-decoration:none}
+    .page{
+      max-width:1200px;
+      margin:24px auto;
+      padding:0 16px;
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap:16px;
+      align-items:start;
+    }
+    header{
+      grid-column:1 / -1;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:22px 22px;
+      text-align:center;
+    }
+    header h1{
+      margin:0;
+      font-size:26px;
+      letter-spacing:.2px;
+    }
+
+    .main{
+      background:transparent;
+      min-height:200px;
+    }
+    .sidebar{
+      position:sticky;
+      top:16px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:14px;
+      max-height: calc(100vh - 32px);
+      overflow-y: auto;
+    }
+    .sidebar h3{
+      margin:6px 0 12px;
+      font-size:16px;
+      color:var(--muted);
+    }
+    #sidebarTOC{display:flex;flex-direction:column;gap:10px}
+    .toc-link{
+      display:block;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      font-size:14px;
+      line-height:1.35;
+      transition: all 0.2s ease;
+    }
+    .toc-link:hover{
+      border-color:var(--accent);
+      background:var(--accent-light);
+    }
+    .toc-link.active{
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(66,153,225,.15);
+      font-weight:700;
+      background:var(--accent-light);
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      margin-bottom:14px;
+    }
+    .card h2{
+      margin:0 0 10px;
+      font-size:18px;
+      color:var(--accent);
+    }
+    .card h3{
+      margin:16px 0 8px;
+      font-size:16px;
+    }
+    .muted{color:var(--muted)}
+    ul{margin:10px 0 0 0; padding:0 18px}
+    li{margin:6px 0}
+
+    /* Highlight blocks */
+    .alert-danger{
+      background:var(--danger-bg);
+      border:1px solid var(--danger-border);
+      color:var(--danger-text);
+      border-radius:12px;
+      padding:12px 14px;
+      margin:10px 0;
+      font-weight:600;
+    }
+    .callout-question{
+      border:1px dashed var(--accent);
+      background:#f7fafc;
+      border-radius:12px;
+      padding:12px 14px;
+      margin:10px 0;
+      font-weight:700;
+    }
+    .closing-box{
+      background:var(--closing-bg);
+      border:2px solid var(--closing-border);
+      border-radius:14px;
+      padding:16px;
+      margin-top:14px;
+    }
+    .closing-box h3{margin-top:0;color:var(--accent)}
+    
+    /* Expert Box */
+    .expert-box{
+      background:var(--expert-box-bg);
+      border:2px solid var(--expert-box-border);
+      border-radius:12px;
+      padding:14px;
+      margin:12px 0;
+    }
+    .expert-box h4{
+      margin:0 0 8px;
+      color:#7c3aed;
+      font-size:15px;
+    }
+    
+    /* Story Box */
+    .story-box{
+      background:var(--story-box-bg);
+      border:2px solid var(--story-box-border);
+      border-radius:12px;
+      padding:14px;
+      margin:12px 0;
+    }
+    .story-box h4{
+      margin:0 0 8px;
+      color:#d97706;
+      font-size:15px;
+    }
+    
+    /* Success Box */
+    .success-box{
+      background:#ecfdf5;
+      border:2px solid #bbf7d0;
+      border-radius:12px;
+      padding:14px;
+      margin:12px 0;
+      color:#065f46;
+    }
+    .success-box h4{
+      margin:0 0 8px;
+      color:#065f46;
+      font-size:15px;
+    }
+    
+    /* Signature Box */
+    .signature-box{
+      background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border:1px solid var(--signature-border);
+      border-radius:var(--radius);
+      padding:20px;
+      margin-top:24px;
+      text-align:center;
+      color:#ffffff;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .signature-box .signature-label{
+      font-size:14px;
+      opacity:0.9;
+      margin-bottom:8px;
+    }
+    .signature-box .signature-name{
+      font-size:20px;
+      font-weight:700;
+      margin:8px 0;
+    }
+    .signature-box .signature-contact{
+      font-size:14px;
+      opacity:0.9;
+      margin-top:6px;
+      direction:ltr;
+    }
+
+    /* Infographic */
+    .infographic img{
+      width:100%;
+      height:auto;
+      border-radius:16px;
+      display:block;
+      border:1px solid var(--border);
+      background:#fff;
+    }
+
+    @media (max-width: 980px){
+      .page{grid-template-columns:1fr}
+      .sidebar{position:relative; top:auto; order:-1; max-height: none;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- ===== SIDEBAR (مثبت في اليمين) ===== -->
+    <aside class="sidebar" aria-label="Sidebar">
+      <h3>الوحدات</h3>
+      <nav id="sidebarTOC">
+        <a class="toc-link" href="index.html" data-page="index.html">الوحدة الأولى: إدارة الموارد البشرية</a>
+        <a class="toc-link" href="unit2.html" data-page="unit2.html">الوحدة الثانية: الاستقطاب</a>
+        <a class="toc-link" href="unit3.html" data-page="unit3.html">الوحدة الثالثة: التوظيف</a>
+        <a class="toc-link" href="unit4.html" data-page="unit4.html">الوحدة الرابعة: التدريب والتطوير</a>
+        <a class="toc-link" href="unit5.html" data-page="unit5.html">الوحدة الخامسة: تقييم الأداء</a>
+        <a class="toc-link" href="unit6.html" data-page="unit6.html">الوحدة السادسة: الترقية الوظيفية/المالية</a>
+        <a class="toc-link active" href="unit7.html" data-page="unit7.html">الوحدة السابعة: الوصف الوظيفي</a>
+        <a class="toc-link" href="unit8.html" data-page="unit8.html">الوحدة الثامنة: نظام العمل السعودي</a>
+        <a class="toc-link" href="unit9.html" data-page="unit9.html">الوحدة التاسعة: التفرقة بين القرار الإداري والمخالفة النظامية</a>
+        <a class="toc-link" href="unit10.html" data-page="unit10.html">الوحدة العاشرة: المادة 77</a>
+        <a class="toc-link" href="unit11.html" data-page="unit11.html">الوحدة الحادية عشر: المادة 80</a>
+        <a class="toc-link" href="quiz1.html" data-page="quiz1.html">🧪 الاختبار الشامل</a>
+      </nav>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main" id="mainContent">
+
+      <!-- ===== HEADER ===== -->
+      <header>
+        <h1>منهج إدارة الموارد البشرية الحديثة CBP</h1>
+      </header>
+
+      <!-- ===== UNIT CONTENT ===== -->
+      <section class="card" id="unitContent">
+        <h2>الوحدة السابعة: الوصف الوظيفي (Job Description)</h2>
+        <div class="muted" style="margin-top:-4px;margin-bottom:12px">Job Description — المرجع التشغيلي الحاكم</div>
+        
+        <div style="background:#e0f2fe;border:2px solid #7dd3fc;border-radius:12px;padding:14px;margin:12px 0;">
+          <h3 style="margin-top:0">🎯 الهدف (Objective)</h3>
+          <p>بنهاية هذه الوحدة، سيكون المتدرّب قادرًا على:</p>
+          <ul style="margin-bottom:0">
+            <li>فهم الوصف الوظيفي كـ وثيقة تشغيلية حاكمة لا كإجراء شكلي.</li>
+            <li>إدراك دور الوصف الوظيفي في التوظيف، التدريب، التقييم، والترقية.</li>
+            <li>التمييز بين: غياب الوصف الوظيفي، وصف وظيفي عام وضعيف</li>
+            <li>كشف النزاعات الوظيفية الناتجة عن غموض الأدوار قبل وقوعها.</li>
+          </ul>
+        </div>
+        
+        <div style="background:#fef3c7;border:2px solid #fcd34d;border-radius:12px;padding:14px;margin:12px 0;">
+          <h3 style="margin-top:0">📘 المحتوى (Content)</h3>
+          
+          <p>الوصف الوظيفي يحدّد بوضوح:</p>
+          <ul>
+            <li><strong>ماذا يُطلب من الموظف؟</strong></li>
+            <li><strong>ما حدود مسؤولياته؟</strong></li>
+            <li><strong>ما الذي يُحاسَب عليه؟</strong></li>
+            <li><strong>وما الذي لا يُطلب منه أصلًا؟</strong></li>
+          </ul>
+          
+          <p><strong>الوصف الوظيفي ليس:</strong></p>
+          <ul>
+            <li>نصًا عامًا منسوخًا</li>
+            <li>ورقة للتوقيع فقط</li>
+            <li>ملفًا يُحفظ دون استخدام</li>
+          </ul>
+        </div>
+        
+        <div class="success-box">
+          <h4>🟩 قاعدة محورية</h4>
+          <p style="margin:0"><strong>الوصف الوظيفي هو العقد التشغيلي اليومي للوظيفة،<br>
+          وأي قرار لا يعود إليه = قرار ضعيف.</strong></p>
+        </div>
+        
+        <div class="expert-box">
+          <h4>🟪 صندوق أسرار الخبراء — 🟥 (تنبيه مهم)</h4>
+          <p><strong>فخ "الكم مقابل الكيف"</strong></p>
+          <ul>
+            <li>دمج 3 وظائف في شخص واحد</li>
+            <li>براتب أعلى قليلًا</li>
+          </ul>
+          <p style="margin-bottom:0"><strong style="color:#c53030">النتيجة: انهيار مهني + أخطاء + نزاع.</strong></p>
+        </div>
+        
+        <div class="alert-danger">
+          <strong>🟥 ما يجب عدم فعله</strong>
+          <ul style="margin-top:8px">
+            <li>استخدام عبارات فضفاضة مثل "مهام أخرى حسب الحاجة"</li>
+            <li>عدم تحديث الوصف رغم تغيّر الدور</li>
+            <li>التقييم دون الرجوع للوصف</li>
+            <li>استخدام الوصف كأداة ضغط</li>
+          </ul>
+        </div>
+        
+        <h3>🟨 القصة التطبيقية: قصة خطاب التكليف المفتوح (600 ألف ريال)</h3>
+        
+        <div class="story-box">
+          <h4>🟨 قصة من واقع القضاء العمالي</h4>
+          <p>قصة شركة معدات ثقيلة أصدرت خطاب تكليف لموظف للعمل الإضافي دون تحديد:</p>
+          <ul>
+            <li>عدد الأيام</li>
+            <li>عدد الساعات</li>
+            <li>سقف زمني أو مالي</li>
+          </ul>
+          
+          <p><strong>استمر الموظف في البصمة على العمل الإضافي لمدة عام كامل.</strong></p>
+          
+          <p><strong>عند النزاع:</strong><br>
+          قضت المحكمة للموظف بمبلغ <strong>600 ألف ريال</strong> كأجور إضافية.</p>
+          
+          <div class="alert-danger" style="margin-top:12px">
+            <strong>🟥 الخطأ القاتل في القصة</strong><br>
+            تكليف مفتوح دون تحديد نطاق العمل أو السقف الزمني/المالي.
+          </div>
+          
+          <div class="success-box" style="margin-top:12px">
+            <h4>🟩 الدرس المركزي</h4>
+            <p style="margin:0"><strong>الغموض في الوصف أو التكليف ⇦ يتحول إلى التزام مالي ضخم.</strong></p>
+          </div>
+        </div>
+        
+        <h3>🧠 التحليل المهني</h3>
+        
+        <div class="success-box">
+          <h4>🟩 خلاصة تحليلية</h4>
+          <p><strong>الوصف الوظيفي ليس ورقة موارد بشرية<br>
+          بل أداة حماية تشغيلية ومالية</strong></p>
+          
+          <p style="margin-bottom:0"><strong>الغموض لا يخدم المنشأة<br>
+          بل يُستغل ضدها عند النزاع</strong></p>
+        </div>
+        
+        <h3>⚖️ سؤال القرار (Decision)</h3>
+        <div class="alert-danger">
+          <strong>🟥 سؤال يجب التوقف عنده</strong><br><br>
+          في حال النزاع، ما الوثيقة التي يجب الرجوع إليها لحسم الخلاف بشكل مهني ولماذا؟
+        </div>
+        
+        <div style="background:#ddd6fe;border:2px solid #a78bfa;border-radius:12px;padding:14px;margin:12px 0;">
+          <h3 style="margin-top:0">🧠 سؤال التحقق المعرفي (KC Question)</h3>
+          <p>ما الدور الجوهري للوصف الوظيفي داخل المنشأة؟</p>
+          <ul style="list-style: none; padding-right: 0; margin-bottom:0">
+            <li><strong>A)</strong> توضيح المسمّى فقط</li>
+            <li><strong>B)</strong> إجراء شكلي للموارد البشرية</li>
+            <li><strong>C)</strong> تحديد المهام والمسؤوليات ومعايير القياس</li>
+            <li><strong>D)</strong> حماية المدير من اعتراضات الموظفين</li>
+          </ul>
+        </div>
+        
+        <h3>✅ التغذية الراجعة الصحيحة</h3>
+        <div class="success-box">
+          <h4>🟩 الإجابة الصحيحة: (C)</h4>
+          <p><strong>الوصف الوظيفي:</strong></p>
+          <ul style="margin-bottom:0">
+            <li>يضبط التوقعات</li>
+            <li>يحدد المسؤوليات</li>
+            <li>ويُستخدم كمرجع موضوعي للتقييم والمساءلة</li>
+          </ul>
+        </div>
+        
+        <div class="closing-box">
+          <h3>🟦 🏁 معيار الإتقان (Mastery)</h3>
+          <p class="muted" style="margin-top:-6px">إغلاق الوحدة — معيار الإتقان</p>
+          
+          <p style="margin-top:12px"><strong>🟦 يُعد المتدرّب متقنًا إذا استطاع:</strong></p>
+          <ul style="margin-bottom:0">
+            <li>شرح الوصف الوظيفي كمرجع تشغيلي لا ورقة شكلية.</li>
+            <li>استخدام الوصف الوظيفي لحسم نزاع مهني.</li>
+            <li>كشف أثر الغموض في الوصف على التقييم والتكلفة.</li>
+            <li>الدفاع عن ضرورة تحديث الوصف وربطه بالتقييم.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ===== INFOGRAPHIC ===== -->
+      <section class="card infographic" id="infographicSection">
+        <h2>📌 الإنفوجرافيك (Infographic)</h2>
+        <img id="infographicImg" src="" alt="Infographic">
+        <div class="muted" id="infographicFallback" style="display:none;margin-top:10px;"></div>
+      </section>
+
+      <!-- ===== SIGNATURE ===== -->
+      <div class="signature-box" id="signature">
+        <div class="signature-label">تم إعداد هذا المحتوى بواسطة</div>
+        <div class="signature-name">أنس العضيبي</div>
+        <div class="signature-contact">جوال: 0505530803</div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <script>
+    // Active link
+    (function(){
+      const file = (location.pathname.split('/').pop() || 'unit7.html');
+      document.querySelectorAll('#sidebarTOC .toc-link').forEach(a=>{
+        if(a.getAttribute('data-page') === file) a.classList.add('active');
+      });
+    })();
+
+    // Infographic resolver
+    (function(){
+      const file = decodeURIComponent((location.pathname.split('/').pop() || 'unit7.html'));
+      let base = file.replace(/\.html?$/i,'');
+      base = base.replace(/\s*\(\d+\)$/, '').trim();
+      const img = document.getElementById('infographicImg');
+      const fb  = document.getElementById('infographicFallback');
+      if(!img) return;
+
+      const path = `assets/${base}.png`;
+      img.src = path;
+      img.onerror = function(){
+        img.style.display = 'none';
+        fb.style.display = 'block';
+        fb.textContent = `لم يتم العثور على ملف الإنفوجرافيك: ${path}`;
+      };
+    })();
+  </script>
+</body>
+</html>
