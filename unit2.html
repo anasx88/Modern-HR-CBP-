@@ -3,607 +3,510 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>الوحدة الثانية: إدارة التعاقد والمدد النظامية</title>
+  <title>الوحدة الثانية: الاستقطاب - منهج إدارة الموارد البشرية CBP</title>
 
   <style>
     :root{
-      /* Consultant-Grade Visual Spec v1.0 */
-      --primary: #0F2A44;
-      --secondary: #3A5F8A;
-      --success: #2F7D5A;
-      --alert: #B23A3A;
-
-      --bg: #F7F9FC;
-      --surface: #FFFFFF;
-      --text: #1F2937;
-      --muted: #6B7280;
-      --border: #E5E7EB;
-
-      --radius: 14px;
-      --shadow: 0 10px 24px rgba(15,42,68,.08);
-      --shadow2: 0 6px 14px rgba(15,42,68,.07);
-
-      --maxw: 1200px;
-      --gap: 18px;
-
-      --font: "Cairo","Tajawal",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+      --bg:#f0f4f8;
+      --card:#ffffff;
+      --text:#2d3748;
+      --muted:#718096;
+      --border:#cbd5e0;
+      --accent:#4299e1;
+      --accent-light:#bee3f8;
+      --danger-bg:#fff5f5;
+      --danger-border:#feb2b2;
+      --danger-text:#c53030;
+      --closing-bg:#ebf8ff;
+      --closing-border:#90cdf4;
+      --radius:12px;
+      --signature-bg:#edf2f7;
+      --signature-border:#a0aec0;
+      --expert-box-bg:#f3e8ff;
+      --expert-box-border:#a78bfa;
+      --story-box-bg:#fffbeb;
+      --story-box-border:#fcd34d;
     }
-
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.85;
+      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
     }
-
-    .wrap{
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 26px 18px 36px;
-    }
-
-    /* ===== Header (Card / Cover Block) ===== */
-    .header-card{
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 28px 32px;
-      margin-bottom: 16px;
-      position: relative;
-      overflow: hidden;
-    }
-    .header-card:before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: linear-gradient(135deg, rgba(15,42,68,.06), rgba(58,95,138,.04));
-      pointer-events:none;
-    }
-    .header-inner{ position:relative; }
-
-    #appTitle{
-      margin:0;
-      font-size: 30px;
-      font-weight: 800;
-      color: var(--primary);
-      letter-spacing: .2px;
-      text-align:center;
-    }
-    #appSubtitle{
-      margin: 8px 0 0;
-      font-size: 15px;
-      color: var(--muted);
-      text-align:center;
-    }
-    .header-divider{
-      margin: 18px auto 0;
-      height: 1px;
-      width: min(720px, 92%);
-      background: var(--border);
-    }
-
-    /* ===== Tabs ===== */
-    .tabs{
-      margin-top: 16px;
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-      justify-content: center;
-    }
-    .tab-btn{
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--primary);
-      padding: 9px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      font: inherit;
-      font-size: 13px;
-      transition: background .15s ease, border-color .15s ease;
-    }
-    .tab-btn:hover{
-      background: rgba(15,42,68,.04);
-      border-color: rgba(15,42,68,.20);
-    }
-    .tab-btn[aria-selected="true"]{
-      background: rgba(15,42,68,.08);
-      border-color: rgba(15,42,68,.30);
-      font-weight: 800;
-    }
-
-    /* ===== Layout (Sidebar + Content) ===== */
-    .layout{
+    a{color:inherit;text-decoration:none}
+    .page{
+      max-width:1200px;
+      margin:24px auto;
+      padding:0 16px;
       display:grid;
-      grid-template-columns: 300px 1fr; /* sidebar on the right (RTL) */
-      gap: var(--gap);
+      grid-template-columns: 320px 1fr;
+      gap:16px;
       align-items:start;
-      margin-top: 14px;
     }
-
-    /* ===== Sidebar ===== */
-    aside{
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow2);
-      padding: 14px;
-      position: sticky;
-      top: 14px;
+    header{
+      grid-column:1 / -1;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:22px 22px;
+      text-align:center;
     }
-
-    .side-head{
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-    .side-title{
+    header h1{
       margin:0;
-      font-size: 13px;
-      font-weight: 900;
-      color: var(--primary);
+      font-size:26px;
+      letter-spacing:.2px;
     }
 
-    .side-actions{
-      display:flex;
-      gap: 10px;
-      margin-bottom: 12px;
+    .main{
+      background:transparent;
+      min-height:200px;
     }
-    .btn{
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--primary);
-      font: inherit;
-      font-size: 13px;
-      cursor: pointer;
-      transition: background .15s ease, border-color .15s ease;
+    .sidebar{
+      position:sticky;
+      top:16px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:14px;
+      max-height: calc(100vh - 32px);
+      overflow-y: auto;
     }
-    .btn:hover{
-      background: rgba(15,42,68,.04);
-      border-color: rgba(15,42,68,.20);
+    .sidebar h3{
+      margin:6px 0 12px;
+      font-size:16px;
+      color:var(--muted);
     }
-
-    #sidebarTOC{
-      list-style:none;
-      margin:0;
-      padding:0;
-      display:flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    #sidebarTOC a{
+    #sidebarTOC{display:flex;flex-direction:column;gap:10px}
+    .toc-link{
       display:block;
-      padding: 10px 10px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--text);
-      text-decoration:none;
-      font-size: 13px;
-      transition: background .15s ease, border-color .15s ease;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      font-size:14px;
+      line-height:1.35;
+      transition: all 0.2s ease;
     }
-    #sidebarTOC a:hover{
-      background: rgba(15,42,68,.04);
-      border-color: rgba(15,42,68,.20);
+    .toc-link:hover{
+      border-color:var(--accent);
+      background:var(--accent-light);
     }
-
-    #sidebarTOC a[aria-current="page"]{
-      background: rgba(15,42,68,.08);
-      border-color: rgba(15,42,68,.30);
-      font-weight: 800;
+    .toc-link.active{
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(66,153,225,.15);
+      font-weight:700;
+      background:var(--accent-light);
     }
-    .side-note{
-      margin-top: 10px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* ===== Content Cards ===== */
-    main{ min-width: 0; }
 
     .card{
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow2);
-      padding: 22px 22px 18px;
-      margin-bottom: 14px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      margin-bottom:14px;
     }
     .card h2{
-      margin: 0 0 10px;
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--secondary);
+      margin:0 0 10px;
+      font-size:18px;
+      color:var(--accent);
     }
-    .card p{ margin: 10px 0; }
+    .card h3{
+      margin:16px 0 8px;
+      font-size:16px;
+    }
+    .muted{color:var(--muted)}
+    ul{margin:10px 0 0 0; padding:0 18px}
+    li{margin:6px 0}
 
-    .badges{ display:flex; flex-wrap:wrap; gap: 8px; margin: 10px 0 8px; }
-    .badge{
-      font-size: 12px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(15,42,68,.03);
-      color: var(--primary);
-      font-weight: 700;
+    /* Highlight blocks */
+    .alert-danger{
+      background:var(--danger-bg);
+      border:1px solid var(--danger-border);
+      color:var(--danger-text);
+      border-radius:12px;
+      padding:12px 14px;
+      margin:10px 0;
+      font-weight:600;
+    }
+    .callout-question{
+      border:1px dashed var(--accent);
+      background:#f7fafc;
+      border-radius:12px;
+      padding:12px 14px;
+      margin:10px 0;
+      font-weight:700;
+    }
+    .closing-box{
+      background:var(--closing-bg);
+      border:2px solid var(--closing-border);
+      border-radius:14px;
+      padding:16px;
+      margin-top:14px;
+    }
+    .closing-box h3{margin-top:0;color:var(--accent)}
+    
+    /* Expert Box */
+    .expert-box{
+      background:var(--expert-box-bg);
+      border:2px solid var(--expert-box-border);
+      border-radius:12px;
+      padding:14px;
+      margin:12px 0;
+    }
+    .expert-box h4{
+      margin:0 0 8px;
+      color:#7c3aed;
+      font-size:15px;
+    }
+    
+    /* Story Box */
+    .story-box{
+      background:var(--story-box-bg);
+      border:2px solid var(--story-box-border);
+      border-radius:12px;
+      padding:14px;
+      margin:12px 0;
+    }
+    .story-box h4{
+      margin:0 0 8px;
+      color:#d97706;
+      font-size:15px;
+    }
+    
+    /* Success Box */
+    .success-box{
+      background:#ecfdf5;
+      border:2px solid #bbf7d0;
+      border-radius:12px;
+      padding:14px;
+      margin:12px 0;
+      color:#065f46;
+    }
+    .success-box h4{
+      margin:0 0 8px;
+      color:#065f46;
+      font-size:15px;
+    }
+    
+    /* Signature Box */
+    .signature-box{
+      background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border:1px solid var(--signature-border);
+      border-radius:var(--radius);
+      padding:20px;
+      margin-top:24px;
+      text-align:center;
+      color:#ffffff;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .signature-box .signature-label{
+      font-size:14px;
+      opacity:0.9;
+      margin-bottom:8px;
+    }
+    .signature-box .signature-name{
+      font-size:20px;
+      font-weight:700;
+      margin:8px 0;
+    }
+    .signature-box .signature-contact{
+      font-size:14px;
+      opacity:0.9;
+      margin-top:6px;
+      direction:ltr;
     }
 
-    /* ===== Inline Callouts (place where needed) ===== */
-    .callout{
-      margin: 14px 0;
-      padding: 14px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #fff;
-    }
-    .callout .label{
-      font-weight: 900;
-      font-size: 13px;
-      margin-bottom: 8px;
-    }
-    .callout ul{ margin:0; padding-right: 18px; }
-
-    .callout-danger{
-      background: rgba(178,58,58,0.08);
-      border-color: rgba(178,58,58,0.25);
-      border-right: 4px solid var(--alert);
-    }
-    .callout-danger .label{ color: #7A1F1F; }
-
-    .callout-success{
-      background: rgba(47,125,90,0.08);
-      border-color: rgba(47,125,90,0.25);
-      border-right: 4px solid var(--success);
-    }
-    .callout-success .label{ color: #1F5B43; }
-
-    .callout-info{
-      background: rgba(58,95,138,0.08);
-      border-color: rgba(58,95,138,0.22);
-      border-right: 4px solid var(--secondary);
-    }
-    .callout-info .label{ color: var(--primary); }
-
-    /* ===== Steps ===== */
-    .steps-title{
-      margin: 16px 0 8px;
-      font-weight: 900;
-      color: var(--primary);
-    }
-    .steps{
-      margin: 0;
-      padding-right: 22px;
-    }
-    .steps li{ margin: 6px 0; }
-
-    /* ===== Tables ===== */
-    table{
-      width: 100%;
-      border-collapse: collapse;
-      margin: 12px 0;
-      font-size: 13px;
-    }
-    th,td{
-      border: 1px solid var(--border);
-      padding: 10px 10px;
-      vertical-align: top;
-    }
-    th{
-      background: rgba(15,42,68,.03);
-      font-weight: 900;
-      color: var(--primary);
-    }
-
-    /* ===== Infographic (LAST inside unit) ===== */
-    .infographic{
-      margin-top: 16px;
-      padding-top: 12px;
-      border-top: 1px dashed var(--border);
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .infographic .cap{
-      font-weight: 900;
-      margin-bottom: 8px;
-      color: var(--muted);
-    }
+    /* Infographic */
     .infographic img{
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      border: 1px solid var(--border);
+      width:100%;
+      height:auto;
+      border-radius:16px;
       display:block;
-      background: #fff;
-    }
-    .infographic .hint{ margin-top: 8px; }
-
-    /* ===== Signature Authority Block (in place / end) ===== */
-    .signature-card{
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-top: 4px solid var(--primary);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow2);
-      padding: 22px 18px;
-      text-align: center;
-      margin-top: 18px;
-    }
-    .signature-card .label{
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 900;
-      margin-bottom: 6px;
-    }
-    .signature-card .name{
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--primary);
-      margin: 0 0 2px;
-    }
-    .signature-card .contact{
-      font-size: 15px;
-      margin: 0;
-      color: var(--text);
+      border:1px solid var(--border);
+      background:#fff;
     }
 
-    /* ===== Responsive ===== */
     @media (max-width: 980px){
-      .layout{ grid-template-columns: 1fr; }
-      aside{ position: static; }
-      .header-card{ padding: 22px 18px; }
-      #appTitle{ font-size: 24px; }
-    }
-
-    /* ===== Print ===== */
-    @media print{
-      body{ background:#fff !important; color:#000 !important; }
-      .wrap{ max-width: none; padding: 0; }
-      .layout{ grid-template-columns: 1fr; gap: 0; margin-top: 10px; }
-      aside{ display:none !important; }          /* Sidebar hidden */
-      .tabs{ display:none !important; }          /* Tabs hidden */
-      .header-card{ box-shadow:none !important; }
-      .card,.signature-card{
-        box-shadow:none !important;
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-      table{
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-      h2, .steps-title{
-        break-after: avoid;
-        page-break-after: avoid;
-      }
-      @page{ size: A4; margin: 14mm; }
+      .page{grid-template-columns:1fr}
+      .sidebar{position:relative; top:auto; order:-1; max-height: none;}
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
+  <div class="page">
 
-    <!-- HEADER (Anchors for Injection) -->
-    <section class="header-card" aria-label="header">
-      <div class="header-inner">
-        <h1 id="appTitle">عنوان المحتوى التدريبي</h1>
-        <p id="appSubtitle"></p>
-        <div class="header-divider"></div>
-      </div>
-    </section>
+    <!-- ===== SIDEBAR (مثبت في اليمين) ===== -->
+    <aside class="sidebar" aria-label="Sidebar">
+      <h3>الوحدات</h3>
+      <nav id="sidebarTOC">
+        <a class="toc-link" href="index.html" data-page="index.html">الوحدة الأولى: إدارة الموارد البشرية</a>
+        <a class="toc-link active" href="unit2.html" data-page="unit2.html">الوحدة الثانية: الاستقطاب</a>
+        <a class="toc-link" href="unit3.html" data-page="unit3.html">الوحدة الثالثة: التوظيف</a>
+        <a class="toc-link" href="unit4.html" data-page="unit4.html">الوحدة الرابعة: التدريب والتطوير</a>
+        <a class="toc-link" href="unit5.html" data-page="unit5.html">الوحدة الخامسة: تقييم الأداء</a>
+        <a class="toc-link" href="unit6.html" data-page="unit6.html">الوحدة السادسة: الترقية الوظيفية/المالية</a>
+        <a class="toc-link" href="unit7.html" data-page="unit7.html">الوحدة السابعة: الوصف الوظيفي</a>
+        <a class="toc-link" href="unit8.html" data-page="unit8.html">الوحدة الثامنة: نظام العمل السعودي</a>
+        <a class="toc-link" href="unit9.html" data-page="unit9.html">الوحدة التاسعة: التفرقة بين القرار الإداري والمخالفة النظامية</a>
+        <a class="toc-link" href="unit10.html" data-page="unit10.html">الوحدة العاشرة: المادة 77</a>
+        <a class="toc-link" href="unit11.html" data-page="unit11.html">الوحدة الحادية عشر: المادة 80</a>
+        <a class="toc-link" href="quiz1.html" data-page="quiz1.html">🧪 الاختبار الشامل</a>
+      </nav>
+    </aside>
 
-    <!-- LAYOUT -->
-    <section class="layout">
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main" id="mainContent">
 
-      <!-- SIDEBAR -->
-      <aside aria-label="sidebar">
-        <div class="side-head">
-          <p class="side-title">الوحدات</p>
-        </div>
+      <!-- ===== HEADER ===== -->
+      <header>
+        <h1>منهج إدارة الموارد البشرية الحديثة CBP</h1>
+      </header>
 
-        <div class="side-actions">
-          <button class="btn" id="printBtn" type="button">طباعة PDF</button>
-        </div>
-
-        <ul id="sidebarTOC" aria-label="table of contents"></ul>
-
-        <div class="side-note">* الشريط الجانبي وزر الطباعة يختفيان تمامًا عند الطباعة.</div>
-      </aside>
-
-      <!-- CONTENT -->
-      <main aria-label="content">
-        <div id="contentContainer"></div>
-        <div id="infographicContainer"></div>
-
+      <!-- ===== UNIT CONTENT ===== -->
+      <section class="card" id="unitContent">
+        <h2>الوحدة الثانية: الاستقطاب (Recruitment)</h2>
+        <div class="muted" style="margin-top:-4px;margin-bottom:12px">Recruitment — جذب المرشحين الصحيحين قبل التوظيف</div>
         
-
-        <!-- SIGNATURE (Fixed place / end) -->
-        <div class="signature-card" aria-label="signature">
-          <div class="label">تم إعداد هذا المحتوى بواسطة</div>
-          <div class="name">أنس العضيبي</div>
-          <p class="contact">0505530803</p>
+        <div style="background:#e0f2fe;border:2px solid #7dd3fc;border-radius:12px;padding:14px;margin:12px 0;">
+          <h3 style="margin-top:0">🎯 الهدف (Objective)</h3>
+          <p>بنهاية هذه الوحدة، سيكون المتدرّب قادرًا على:</p>
+          <ul style="margin-bottom:0">
+            <li>فهم الاستقطاب كمرحلة حاكمة تسبق كل قرارات الموارد البشرية اللاحقة.</li>
+            <li>التمييز بين الاستقطاب (Recruitment) والتوظيف (Hiring) وعدم الخلط بينهما.</li>
+            <li>اكتشاف أخطاء الاستقطاب مبكرًا قبل أن تتحول إلى ضعف أداء ونزاعات وخسائر.</li>
+            <li>بناء موقف مهني يرفض "الحلول السريعة" التي تُكلف المنشأة لاحقًا.</li>
+          </ul>
         </div>
-      </main>
+        
+        <div style="background:#fef3c7;border:2px solid #fcd34d;border-radius:12px;padding:14px;margin:12px 0;">
+          <h3 style="margin-top:0">📘 المحتوى (Content)</h3>
+          
+          <p>الاستقطاب هو عملية جذب مرشحين مناسبين وفق معايير واضحة مسبقة.</p>
+          
+          <p><strong>هو ليس:</strong></p>
+          <ul>
+            <li>تعيين أول شخص متاح</li>
+            <li>ولا ملء شاغر بسرعة</li>
+            <li>ولا مجاملة أو توصية بدون تحقق</li>
+          </ul>
+        </div>
+        
+        <div class="expert-box">
+          <h4>🟪 صندوق أسرار الخبراء — الاستقطاب الرقمي المتقدم</h4>
+          <p><strong>🟪 واقع السوق الحديث</strong></p>
+          <p>أدوات الاستقطاب لم تعد تقليدية فقط:</p>
+          <ul>
+            <li>السير الذاتية بالفيديو والأنيميشن</li>
+            <li>أنظمة الفرز الآلي ATS</li>
+            <li>تحليل الكلمات المفتاحية والسلوك الوظيفي</li>
+          </ul>
+          
+          <div class="success-box" style="margin-top:12px">
+            <h4>🟩 تعريف نظام الفرز الآلي (ATS - Applicant Tracking System):</h4>
+            <p>هو نظام برمجـي رقمي يُعد <strong>"بوابة العبور الرقمية"</strong> في الموارد البشرية الحديثة، حيث يعتمد على الذكاء الاصطناعي (AI) لإدارة وعلاج الأعداد الضخمة من المتقدمين (التي قد تصل لآلاف) عبر منصات التوظيف.</p>
+            
+            <p><strong>آلية عمل النظام:</strong></p>
+            <ul>
+              <li><strong>الفلترة الذكية:</strong> يقوم النظام بفرز السير الذاتية آلياً بناءً على اشتراطات محددة مسبقاً (مثل سنوات الخبرة، المؤهلات، أو مهارات تقنية دقيقة)، واستبعاد غير المطابق منها فوراً لتوفير الوقت والجهد.</li>
+              <li><strong>التحليل البياني:</strong> يطرح النظام تساؤلات محددة على المرشح حول إنجازاته وخبراته، ثم يحولها إلى بيانات رقمية يسهل على مسؤولي التوظيف قراءتها والمقارنة بينها.</li>
+            </ul>
+            
+            <p><strong>تنبيه للممارس المهني:</strong><br>
+            بما أن النظام يعمل كـ "فلتر" أولي، فإن السير الذاتية التي لا تُكتب بصيغة متوافقة مع نظام ATS تظل <strong>"غير مرئية" (Invisible)</strong> لمسؤول التوظيف مهما كانت كفاءة صاحبها، لذا يجب توجيه المرشحين دائماً لاستخدام الكلمات المفتاحية الصحيحة التي تبرز تخصصاتهم أمام النظام.</p>
+          </div>
+          
+          <p style="margin-top:12px"><strong>هذه الأدوات:</strong></p>
+          <ul style="margin-bottom:0">
+            <li>تقلل التحيّز</li>
+            <li>تسرّع الفلترة</li>
+            <li>لكنها لا تُغني عن التحقق العملي</li>
+          </ul>
+        </div>
+        
+        <div class="success-box">
+          <h4>🟩 قاعدة محورية</h4>
+          <p><strong>الاستقطاب يجيب عن سؤال واحد فقط:</strong><br>
+          من هم الأشخاص المناسبون أصلًا لهذه الوظيفة؟</p>
+          <p style="margin-bottom:0">إذا أخطأت هنا، فلن ينقذك التدريب لاحقًا، وسيبدو التقييم ظالمًا، وقد يتحول القرار إلى نزاع.</p>
+        </div>
+        
+        <div class="alert-danger">
+          <strong>🟥 ما يجب عدم فعله</strong>
+          <ul style="margin-top:8px">
+            <li>إعلان وظيفي عام ومبهم</li>
+            <li>قبول "خبرات" بدون تحقق فعلي</li>
+            <li>اختيار المرشح لأنه "متوفر بسرعة" بدل "مناسب فعليًا"</li>
+            <li>الاعتماد على الانطباع: "ارتحت له" بدل معيار واضح</li>
+          </ul>
+        </div>
+        
+        <div class="expert-box">
+          <h4>🟪 صندوق أسرار الخبراء — المعايير غير التقليدية</h4>
+          <p><strong>🟪 دهاء تشغيلي حقيقي</strong></p>
+          <p><strong>مثال واقعي:</strong><br>
+          توظيف موظفي الكول سنتر حسب لهجة المنطقة<br>
+          لضمان تقبّل العميل وسهولة التواصل</p>
+          <p style="margin-bottom:0"><strong style="color:#c53030">تجاهل هذا المعيار: يرفع الشكاوى رغم كفاءة الموظف الفنية</strong></p>
+        </div>
+        
+        <h3>🧩 الحالة (Case)</h3>
+        <div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:12px;padding:12px 14px;margin:10px 0;">
+          <p>احتاجت منشأة إلى شغل وظيفة بشكل عاجل.</p>
+          <p>تم نشر إعلان وظيفي بصيغة عامة جدًا دون:</p>
+          <ul>
+            <li>تحديد واضح للمهام</li>
+            <li>أو المؤهلات المطلوبة</li>
+            <li>أو الخبرة المتوقعة</li>
+          </ul>
+          <p style="margin-bottom:0">تم اختيار مرشح بسرعة بسبب توفره، وبعد فترة ظهر أنه لا يمتلك المهارات المطلوبة، وبدأ الأداء يتراجع وظهرت شكاوى تشغيلية.</p>
+        </div>
+        
+        <div class="success-box">
+          <h4>🟩 تحليل مهني مختصر</h4>
+          <p style="margin:0">المشكلة هنا ليست "أداء الموظف فقط"، بل غالبًا فشل في الاستقطاب:<br>
+          <strong>معايير ضعيفة → اختيار خاطئ → أداء متعثر → تقييم متوتر → قرارات صعبة.</strong></p>
+        </div>
+        
+        <h3>🟨 القصة التطبيقية: قصة السائق والـ 5 دقائق</h3>
+        
+        <div class="story-box">
+          <h4>🟨 قصة من واقع سوق العمل السعودي</h4>
+          <p>قصة استقدام سائقين من شرق آسيا.</p>
+          <p>أحدهم أكد أنه محترف ولديه خبرة قوية، وتم التعامل مع كلامه ورخصته وخبراته على أنها صحيحة.</p>
+          
+          <p><strong>عند اختبار السائق عمليًا على "تريلا" (شاحنة كبيرة)،</strong><br>
+          كاد أن يتسبب في كارثة خلال أول <strong>5 دقائق فقط</strong> من التجربة العملية.</p>
+          
+          <p><strong>بعد الفحص اتضح أن:</strong></p>
+          <ul>
+            <li>الرخصة "مضروبة" / غير موثوقة</li>
+            <li>والخبرة المدعاة كانت "مزورة"</li>
+            <li>وتم تمرير المرشح بدون تحقق مهني عملي</li>
+          </ul>
+          
+          <div class="alert-danger" style="margin-top:12px">
+            <strong>🟥 الخطأ القاتل في القصة</strong><br>
+            الاعتماد على الورق/الكلام بدل التحقق الفعلي في مرحلة الاستقطاب.
+          </div>
+          
+          <div class="success-box" style="margin-top:12px">
+            <h4>🟩 الدرس المركزي</h4>
+            <p style="margin:0">الاستقطاب ليس "تعبئة شاغر" بل <strong>"فلترة مخاطر"</strong> قبل أن تدخل المخاطر إلى التشغيل.</p>
+          </div>
+        </div>
+        
+        <h3>⚖️ سؤال القرار (Decision)</h3>
+        <div class="alert-danger">
+          <strong>🟥 سؤال يجب التوقف عنده</strong><br><br>
+          في قصة السائق، هل المشكلة كانت في السائق فقط، أم في منظومة الاستقطاب والتحقق؟ ولماذا؟
+        </div>
+        
+        <div class="expert-box">
+          <h4>🟪 صندوق أسرار الخبراء — الوظائف المستحيلة</h4>
+          <p><strong>🟪 قصة "مهندس المصنع الفرنسي"</strong></p>
+          <p>واجهت شركة وظيفة نادرة عالميًا.<br>
+          السوق لم يوفر البديل.</p>
+          
+          <p><strong>الحل لم يكن:</strong></p>
+          <ul>
+            <li>إعلان جديد</li>
+            <li>ولا استقطاب خارجي</li>
+          </ul>
+          
+          <p><strong>بل:</strong></p>
+          <ul>
+            <li>اختيار موظف داخلي</li>
+            <li>تدريب بالاستبقاء</li>
+            <li>بناء الكفاءة بدل البحث عنها</li>
+          </ul>
+          
+          <p style="margin-bottom:0"><strong>بعض الوظائف لا تُستقطَب… بل تُصنَع داخليًا.</strong></p>
+        </div>
+        
+        <div style="background:#ddd6fe;border:2px solid #a78bfa;border-radius:12px;padding:14px;margin:12px 0;">
+          <h3 style="margin-top:0">🧠 سؤال التحقق المعرفي (KC Question)</h3>
+          <p>أي العبارات التالية تعبّر بدقة عن الخطأ الأساسي؟</p>
+          <ul style="list-style: none; padding-right: 0; margin-bottom:0">
+            <li><strong>A)</strong> السائق سيئ ويجب فصله فورًا</li>
+            <li><strong>B)</strong> التدريب كان سيحل المشكلة</li>
+            <li><strong>C)</strong> الاستقطاب فشل لأنه لم يحدد المعايير ويتحقق منها عمليًا</li>
+            <li><strong>D)</strong> هذه أمور طبيعية في بيئة العمل</li>
+          </ul>
+        </div>
+        
+        <h3>✅ التغذية الراجعة الصحيحة</h3>
+        <div class="success-box">
+          <h4>🟩 الإجابة الصحيحة: (C)</h4>
+          <p><strong>الخطأ الجوهري وقع في مرحلة الاستقطاب لأن:</strong></p>
+          <ul>
+            <li>لم يتم ضبط معايير القبول بدقة</li>
+            <li>لم يتم التحقق عمليًا قبل التعاقد</li>
+            <li>تم إدخال خطر تشغيلي مباشر للمنشأة</li>
+          </ul>
+          <p style="margin-bottom:0"><strong>التدريب لا يعالج "شخص غير مناسب أصلًا" لدور عالي الخطورة.</strong></p>
+        </div>
+        
+        <div class="closing-box">
+          <h3>🟦 🏁 معيار الإتقان (Mastery)</h3>
+          <p class="muted" style="margin-top:-6px">إغلاق الوحدة — معيار الإتقان</p>
+          
+          <p style="margin-top:12px"><strong>🟦 يُعتبر المتدرّب متقنًا إذا استطاع:</strong></p>
+          <ul style="margin-bottom:0">
+            <li>شرح الفرق بين Recruitment وHiring بوضوح دون خلط.</li>
+            <li>تبرير لماذا التحقق (Verification) جزء من الاستقطاب وليس مرحلة لاحقة.</li>
+            <li>تحديد 3 أخطاء قاتلة في الاستقطاب (إعلان مبهم/تحقق ضعيف/اختيار سريع).</li>
+            <li>الدفاع عن قرار مهني يرفض إدخال مرشح عالي المخاطر دون اختبار عملي ومعايير مكتوبة.</li>
+          </ul>
+        </div>
+      </section>
 
-    </section>
+      <!-- ===== INFOGRAPHIC ===== -->
+      <section class="card infographic" id="infographicSection">
+        <h2>📌 الإنفوجرافيك (Infographic)</h2>
+        <img id="infographicImg" src="" alt="Infographic">
+        <div class="muted" id="infographicFallback" style="display:none;margin-top:10px;"></div>
+      </section>
+
+      <!-- ===== SIGNATURE ===== -->
+      <div class="signature-box" id="signature">
+        <div class="signature-label">تم إعداد هذا المحتوى بواسطة</div>
+        <div class="signature-name">أنس العضيبي</div>
+        <div class="signature-contact">جوال: 0505530803</div>
+      </div>
+
+    </main>
+
   </div>
 
   <script>
-    /*****************************************************************
-     * Template Data Contract v1.0 (Inline Edition)
-     *
-     * mode: "days" | "modules"   => Tabs labels only
-     * tabs: [{ id, label, sections:[...] }]
-     *
-     * SECTION:
-     * - id, title
-     * - unitName: used for Infographic file: assets/<unitName>.png
-     * - badges: ["Required", ...] (optional)
-     * - steps: [ ... ] (optional)
-     * - bodyHtml: (required) you place inline callouts anywhere here
-     * - infographic: true/false (if true => appended LAST inside the unit)
-     *
-     * Inline callouts (use inside bodyHtml):
-     *  - <div class="callout callout-danger">...</div>
-     *  - <div class="callout callout-success">...</div>
-     *****************************************************************/
-
-    const TEMPLATE_DATA = {
-  "mode": "modules",
-  "title": "الوحدة الثانية: إدارة التعاقد والمدد النظامية",
-  "subtitle": "",
-  "tabs": [
-    {
-      "id": "u2",
-      "label": "الوحدة الثانية: إدارة التعاقد والمدد النظامية",
-      "sections": [
-        {
-          "id": "u2_main",
-          "title": "الوحدة الثانية: إدارة التعاقد والمدد النظامية",
-          "unitName": "الوحدة_الثانية",
-          "badges": [],
-          "steps": [],
-          "bodyHtml": "<div class=\"callout callout-info\">\n<div class=\"label\">Learning Objectives (Recap)</div>\n<ul>\n<li>التمييز بين أنواع العقود وآثار كل نوع.</li>\n<li>فهم قواعد المدد والتحوّل وفترة التجربة.</li>\n<li>إدراك مخاطر الشروط التعاقدية المخالفة أو غير المتوازنة.</li>\n</ul></div>\n<h3 class=\"steps-title\">Core Content</h3>\n<p>العقد العمالي هو المرجع الأول عند النزاع. يميّز النظام بين عقود محددة المدة وغير محددة المدة، وتختلف آثار كل نوع في الاستمرار والإنهاء والتعويضات. كما أن “تحول العقد” نتيجة الاستمرار/التجديد في حالات معينة يغيّر آثار الإنهاء جذريًا.</p>\n<p>فترة التجربة مقيدة: مدة قصوى وضوابط واضحة، وأي شرط يتجاوز الحد النظامي يُعد مخالفًا ويُلغى أثره.</p>\n<p>المخالصات وإبراء الذمة لا تُستخدم كوسيلة ضغط أثناء سريان العقد. قوتها تكون بعد انتهاء العلاقة وبإرادة حرة.</p>\n<h3 class=\"steps-title\">قصص تطبيقية وتوضيحية</h3><div class=\"callout callout-info\"><div class=\"label\">قصة تطبيقية — بطلان الشرط الجزائي غير المتوازن</div><p><strong>النظام الذي استندت عليه:</strong> نظام العمل – بطلان الشروط المخالفة/غير المتوازنة</p><p><strong>القصة:</strong> منشأة وضعت شرطًا جزائيًا 40,000 ريال على العامل مقابل التزام على المنشأة لا يتجاوز 100 ريال. حكمت المحكمة ببطلان الشرط لعدم التوازن ومخالفته للنظام.</p><p><strong>ماذا نستفيد من القصة:</strong> الشروط المخالفة أو غير المتوازنة تُلغى نظامًا حتى لو وُقعت.</p></div><div class=\"callout callout-info\"><div class=\"label\">قصة تحذيرية — المخالصة المبكرة والإذعان</div><p><strong>النظام الذي استندت عليه:</strong> نظام العمل – المخالصات وإبراء الذمة</p><p><strong>القصة:</strong> موظفة وقّعت مخالصة بمبلغ أقل وهي على رأس العمل. اعتُبر التوقيع باطلًا لوقوعه تحت الإذعان وأُلزمت المنشأة بكامل الحقوق.</p><p><strong>ماذا نستفيد من القصة:</strong> المخالصة أثناء سريان العقد تزيد المخاطر وقد تُسقط قوتها القانونية.</p></div><div class=\"callout callout-danger\">\n<div class=\"label\">تنبيه — معلومات يجب الانتباه لها</div>\n<ul>\n<li>أي شرط يخالف نظام العمل أو ينتقص من حقوق العامل يُلغى حتى لو وقّع عليه الطرفان.</li>\n</ul></div>\n<div class=\"callout callout-success\">\n<div class=\"label\">تركيز — نقاط يجب التركيز عليها</div>\n<ul>\n<li>مراجعة الصياغة لضمان التوازن النظامي.</li>\n<li>ضبط مدد العقود والتحوّل بدقة.</li>\n<li>عدم استخدام المخالصات أثناء سريان العقد كحل “سريع”.</li>\n</ul></div>\n<h3 class=\"steps-title\">Key Takeaways</h3>\n<ul>\n<li>العقد هو المرجع الأول عند النزاع.</li>\n<li>الشروط المخالفة/غير المتوازنة باطلة نظامًا.</li>\n<li>المخالصة المبكرة تزيد المخاطر بدل تقليلها.</li>\n<li>سوء الصياغة مصدر رئيسي للنزاعات.</li>\n</ul>",
-          "infographic": true
-        }
-      ]
-    }
-  ]
-};
-
-    const elTitle = document.getElementById("appTitle");
-    const elSubtitle = document.getElementById("appSubtitle");
-    const elTOC = document.getElementById("sidebarTOC");
-    const elContent = document.getElementById("contentContainer");
-    const elInf = document.getElementById("infographicContainer");
-    document.getElementById("printBtn").addEventListener("click", () => window.print());
-
-    const sanitizeId = (id) => String(id).replace(/[^a-zA-Z0-9_-]/g, "_");
-
-    function renderApp(data){
-  elTitle.textContent = data.title || "";
-  elSubtitle.textContent = data.subtitle || "";
-  elSubtitle.style.display = (data.subtitle ? "block" : "none");
-  if (!data.subtitle) { elSubtitle.style.display = "none"; } else { elSubtitle.style.display = "block"; }
-  if (!elSubtitle.textContent.trim()) { elSubtitle.style.display = "none"; }
-  const tab = (data.tabs || [])[0];
-  if (tab){
-    renderContent(tab);
-  }
-  renderTOC();
-}
-
-    function renderTOC(){
-  elTOC.innerHTML = '<li><a href="index.html" >الوحدة الأولى: نظام العمل والهيكل القضائي العمالي</a></li><li><a href="unit2.html" aria-current="page">الوحدة الثانية: إدارة التعاقد والمدد النظامية</a></li><li><a href="unit3.html" >الوحدة الثالثة: الأجور، الاستحقاقات، وحسابات نهاية الخدمة</a></li><li><a href="unit4.html" >الوحدة الرابعة: العمليات الرقمية والمنصات الحكومية</a></li><li><a href="unit5.html" >الوحدة الخامسة: التنظيم الداخلي والحوكمة الإدارية</a></li><li><a href="unit6.html" >الوحدة السادسة: الانضباط الإداري وإدارة المخاطر العمالية</a></li>';
-}
-
-    function makeBadges(badges){
-      if (!badges || !badges.length) return null;
-      const wrap = document.createElement("div");
-      wrap.className = "badges";
-      badges.forEach(txt => {
-        const s = document.createElement("span");
-        s.className = "badge";
-        s.textContent = txt;
-        wrap.appendChild(s);
+    // Active link
+    (function(){
+      const file = (location.pathname.split('/').pop() || 'unit2.html');
+      document.querySelectorAll('#sidebarTOC .toc-link').forEach(a=>{
+        if(a.getAttribute('data-page') === file) a.classList.add('active');
       });
-      return wrap;
-    }
+    })();
 
-    function makeSteps(steps){
-      if (!steps || !steps.length) return null;
-      const title = document.createElement("div");
-      title.className = "steps-title";
-      title.textContent = "التسلسل المنهجي";
+    // Infographic resolver
+    (function(){
+      const file = decodeURIComponent((location.pathname.split('/').pop() || 'unit2.html'));
+      let base = file.replace(/\.html?$/i,'');
+      base = base.replace(/\s*\(\d+\)$/, '').trim();
+      const img = document.getElementById('infographicImg');
+      const fb  = document.getElementById('infographicFallback');
+      if(!img) return;
 
-      const ol = document.createElement("ol");
-      ol.className = "steps";
-      steps.forEach(s => {
-        const li = document.createElement("li");
-        li.textContent = s;
-        ol.appendChild(li);
-      });
-
-      const wrap = document.createElement("div");
-      wrap.appendChild(title);
-      wrap.appendChild(ol);
-      return wrap;
-    }
-
-    function makeInfographic(unitName){
-      const box = document.createElement("div");
-      box.className = "infographic";
-
-      const cap = document.createElement("div");
-      cap.className = "cap";
-      cap.textContent = "📌 الإنفوجرافيك (Infographic)";
-
-      const img = document.createElement("img");
-      img.alt = "Infographic — " + unitName;
-      img.src = "assets/" + unitName + ".png";
-
-      const hint = document.createElement("div");
-      hint.className = "hint";
-      hint.textContent = "الملف المطلوب: assets/" + unitName + ".png";
-
-      img.addEventListener("error", () => {
-        img.style.display = "none";
-        hint.textContent = "لم يتم العثور على الصورة: assets/" + unitName + ".png";
-      });
-
-      box.appendChild(cap);
-      box.appendChild(img);
-      box.appendChild(hint);
-      return box;
-    }
-
-    function renderContent(tab){
-      elContent.innerHTML = "";
-      (tab.sections || []).forEach(sec => {
-        const card = document.createElement("section");
-        card.className = "card";
-        card.id = sanitizeId(sec.id);
-
-        const h2 = document.createElement("h2");
-        h2.textContent = sec.title;
-        card.appendChild(h2);
-
-        const badges = makeBadges(sec.badges);
-        if (badges) card.appendChild(badges);
-
-        // bodyHtml (Inline callouts live here)
-        const body = document.createElement("div");
-        body.innerHTML = sec.bodyHtml || "";
-        card.appendChild(body);
-
-        // steps (optional)
-        const steps = makeSteps(sec.steps);
-        if (steps) card.appendChild(steps);
-
-        elContent.appendChild(card);
-      });
-
-      // Infographic section (fixed: before signature)
-      const first = (tab.sections || [])[0] || {};
-      const unit = first.unitName || sanitizeId(first.id || tab.id || 'unit');
-      elInf.innerHTML = '';
-      const infCard = document.createElement('section');
-      infCard.className = 'card';
-      infCard.appendChild(makeInfographic(unit));
-      elInf.appendChild(infCard);
-
-    }
-
-
-    renderApp(TEMPLATE_DATA);
+      const path = `assets/${base}.png`;
+      img.src = path;
+      img.onerror = function(){
+        img.style.display = 'none';
+        fb.style.display = 'block';
+        fb.textContent = `لم يتم العثور على ملف الإنفوجرافيك: ${path}`;
+      };
+    })();
   </script>
 </body>
 </html>
