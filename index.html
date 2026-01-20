@@ -7,603 +7,516 @@
 
   <style>
     :root{
-      /* Consultant-Grade Visual Spec v1.0 */
-      --primary: #0F2A44;
-      --secondary: #3A5F8A;
-      --success: #2F7D5A;
-      --alert: #B23A3A;
-
-      --bg: #F7F9FC;
-      --surface: #FFFFFF;
-      --text: #1F2937;
-      --muted: #6B7280;
-      --border: #E5E7EB;
-
-      --radius: 14px;
-      --shadow: 0 10px 24px rgba(15,42,68,.08);
-      --shadow2: 0 6px 14px rgba(15,42,68,.07);
-
-      --maxw: 1200px;
-      --gap: 18px;
-
-      --font: "Cairo","Tajawal",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+      --bg:#f0f4f8;
+      --card:#ffffff;
+      --text:#2d3748;
+      --muted:#718096;
+      --border:#cbd5e0;
+      --accent:#4299e1;
+      --accent-light:#bee3f8;
+      --danger-bg:#fff5f5;
+      --danger-border:#feb2b2;
+      --danger-text:#c53030;
+      --closing-bg:#ebf8ff;
+      --closing-border:#90cdf4;
+      --radius:12px;
+      --signature-bg:#edf2f7;
+      --signature-border:#a0aec0;
+      --expert-box-bg:#f3e8ff;
+      --expert-box-border:#a78bfa;
+      --story-box-bg:#fffbeb;
+      --story-box-border:#fcd34d;
     }
-
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.85;
+      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
     }
-
-    .wrap{
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 26px 18px 36px;
-    }
-
-    /* ===== Header (Card / Cover Block) ===== */
-    .header-card{
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 28px 32px;
-      margin-bottom: 16px;
-      position: relative;
-      overflow: hidden;
-    }
-    .header-card:before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: linear-gradient(135deg, rgba(15,42,68,.06), rgba(58,95,138,.04));
-      pointer-events:none;
-    }
-    .header-inner{ position:relative; }
-
-    #appTitle{
-      margin:0;
-      font-size: 30px;
-      font-weight: 800;
-      color: var(--primary);
-      letter-spacing: .2px;
-      text-align:center;
-    }
-    #appSubtitle{
-      margin: 8px 0 0;
-      font-size: 15px;
-      color: var(--muted);
-      text-align:center;
-    }
-    .header-divider{
-      margin: 18px auto 0;
-      height: 1px;
-      width: min(720px, 92%);
-      background: var(--border);
-    }
-
-    /* ===== Tabs ===== */
-    .tabs{
-      margin-top: 16px;
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-      justify-content: center;
-    }
-    .tab-btn{
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--primary);
-      padding: 9px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      font: inherit;
-      font-size: 13px;
-      transition: background .15s ease, border-color .15s ease;
-    }
-    .tab-btn:hover{
-      background: rgba(15,42,68,.04);
-      border-color: rgba(15,42,68,.20);
-    }
-    .tab-btn[aria-selected="true"]{
-      background: rgba(15,42,68,.08);
-      border-color: rgba(15,42,68,.30);
-      font-weight: 800;
-    }
-
-    /* ===== Layout (Sidebar + Content) ===== */
-    .layout{
+    a{color:inherit;text-decoration:none}
+    .page{
+      max-width:1200px;
+      margin:24px auto;
+      padding:0 16px;
       display:grid;
-      grid-template-columns: 300px 1fr; /* sidebar on the right (RTL) */
-      gap: var(--gap);
+      grid-template-columns: 320px 1fr;
+      gap:16px;
       align-items:start;
-      margin-top: 14px;
     }
-
-    /* ===== Sidebar ===== */
-    aside{
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow2);
-      padding: 14px;
-      position: sticky;
-      top: 14px;
+    header{
+      grid-column:1 / -1;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:22px 22px;
+      text-align:center;
     }
-
-    .side-head{
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-    .side-title{
+    header h1{
       margin:0;
-      font-size: 13px;
-      font-weight: 900;
-      color: var(--primary);
+      font-size:26px;
+      letter-spacing:.2px;
     }
 
-    .side-actions{
-      display:flex;
-      gap: 10px;
-      margin-bottom: 12px;
+    .main{
+      background:transparent;
+      min-height:200px;
     }
-    .btn{
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--primary);
-      font: inherit;
-      font-size: 13px;
-      cursor: pointer;
-      transition: background .15s ease, border-color .15s ease;
+    .sidebar{
+      position:sticky;
+      top:16px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:14px;
+      max-height: calc(100vh - 32px);
+      overflow-y: auto;
     }
-    .btn:hover{
-      background: rgba(15,42,68,.04);
-      border-color: rgba(15,42,68,.20);
+    .sidebar h3{
+      margin:6px 0 12px;
+      font-size:16px;
+      color:var(--muted);
     }
-
-    #sidebarTOC{
-      list-style:none;
-      margin:0;
-      padding:0;
-      display:flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    #sidebarTOC a{
+    #sidebarTOC{display:flex;flex-direction:column;gap:10px}
+    .toc-link{
       display:block;
-      padding: 10px 10px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--text);
-      text-decoration:none;
-      font-size: 13px;
-      transition: background .15s ease, border-color .15s ease;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      font-size:14px;
+      line-height:1.35;
+      transition: all 0.2s ease;
     }
-    #sidebarTOC a:hover{
-      background: rgba(15,42,68,.04);
-      border-color: rgba(15,42,68,.20);
+    .toc-link:hover{
+      border-color:var(--accent);
+      background:var(--accent-light);
     }
-
-    #sidebarTOC a[aria-current="page"]{
-      background: rgba(15,42,68,.08);
-      border-color: rgba(15,42,68,.30);
-      font-weight: 800;
+    .toc-link.active{
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(66,153,225,.15);
+      font-weight:700;
+      background:var(--accent-light);
     }
-    .side-note{
-      margin-top: 10px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* ===== Content Cards ===== */
-    main{ min-width: 0; }
 
     .card{
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow2);
-      padding: 22px 22px 18px;
-      margin-bottom: 14px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      margin-bottom:14px;
     }
     .card h2{
-      margin: 0 0 10px;
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--secondary);
+      margin:0 0 10px;
+      font-size:18px;
+      color:var(--accent);
     }
-    .card p{ margin: 10px 0; }
+    .card h3{
+      margin:16px 0 8px;
+      font-size:16px;
+    }
+    .muted{color:var(--muted)}
+    ul{margin:10px 0 0 0; padding:0 18px}
+    li{margin:6px 0}
 
-    .badges{ display:flex; flex-wrap:wrap; gap: 8px; margin: 10px 0 8px; }
-    .badge{
-      font-size: 12px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(15,42,68,.03);
-      color: var(--primary);
-      font-weight: 700;
+    /* Highlight blocks */
+    .alert-danger{
+      background:var(--danger-bg);
+      border:1px solid var(--danger-border);
+      color:var(--danger-text);
+      border-radius:12px;
+      padding:12px 14px;
+      margin:10px 0;
+      font-weight:600;
+    }
+    .callout-question{
+      border:1px dashed var(--accent);
+      background:#f7fafc;
+      border-radius:12px;
+      padding:12px 14px;
+      margin:10px 0;
+      font-weight:700;
+    }
+    .closing-box{
+      background:var(--closing-bg);
+      border:2px solid var(--closing-border);
+      border-radius:14px;
+      padding:16px;
+      margin-top:14px;
+    }
+    .closing-box h3{margin-top:0;color:var(--accent)}
+    
+    /* Expert Box */
+    .expert-box{
+      background:var(--expert-box-bg);
+      border:2px solid var(--expert-box-border);
+      border-radius:12px;
+      padding:14px;
+      margin:12px 0;
+    }
+    .expert-box h4{
+      margin:0 0 8px;
+      color:#7c3aed;
+      font-size:15px;
+    }
+    
+    /* Story Box */
+    .story-box{
+      background:var(--story-box-bg);
+      border:2px solid var(--story-box-border);
+      border-radius:12px;
+      padding:14px;
+      margin:12px 0;
+    }
+    .story-box h4{
+      margin:0 0 8px;
+      color:#d97706;
+      font-size:15px;
+    }
+    
+    /* Success Box */
+    .success-box{
+      background:#ecfdf5;
+      border:2px solid #bbf7d0;
+      border-radius:12px;
+      padding:14px;
+      margin:12px 0;
+      color:#065f46;
+    }
+    .success-box h4{
+      margin:0 0 8px;
+      color:#065f46;
+      font-size:15px;
+    }
+    
+    /* Signature Box */
+    .signature-box{
+      background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border:1px solid var(--signature-border);
+      border-radius:var(--radius);
+      padding:20px;
+      margin-top:24px;
+      text-align:center;
+      color:#ffffff;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .signature-box .signature-label{
+      font-size:14px;
+      opacity:0.9;
+      margin-bottom:8px;
+    }
+    .signature-box .signature-name{
+      font-size:20px;
+      font-weight:700;
+      margin:8px 0;
+    }
+    .signature-box .signature-contact{
+      font-size:14px;
+      opacity:0.9;
+      margin-top:6px;
+      direction:ltr;
     }
 
-    /* ===== Inline Callouts (place where needed) ===== */
-    .callout{
-      margin: 14px 0;
-      padding: 14px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #fff;
-    }
-    .callout .label{
-      font-weight: 900;
-      font-size: 13px;
-      margin-bottom: 8px;
-    }
-    .callout ul{ margin:0; padding-right: 18px; }
-
-    .callout-danger{
-      background: rgba(178,58,58,0.08);
-      border-color: rgba(178,58,58,0.25);
-      border-right: 4px solid var(--alert);
-    }
-    .callout-danger .label{ color: #7A1F1F; }
-
-    .callout-success{
-      background: rgba(47,125,90,0.08);
-      border-color: rgba(47,125,90,0.25);
-      border-right: 4px solid var(--success);
-    }
-    .callout-success .label{ color: #1F5B43; }
-
-    .callout-info{
-      background: rgba(58,95,138,0.08);
-      border-color: rgba(58,95,138,0.22);
-      border-right: 4px solid var(--secondary);
-    }
-    .callout-info .label{ color: var(--primary); }
-
-    /* ===== Steps ===== */
-    .steps-title{
-      margin: 16px 0 8px;
-      font-weight: 900;
-      color: var(--primary);
-    }
-    .steps{
-      margin: 0;
-      padding-right: 22px;
-    }
-    .steps li{ margin: 6px 0; }
-
-    /* ===== Tables ===== */
-    table{
-      width: 100%;
-      border-collapse: collapse;
-      margin: 12px 0;
-      font-size: 13px;
-    }
-    th,td{
-      border: 1px solid var(--border);
-      padding: 10px 10px;
-      vertical-align: top;
-    }
-    th{
-      background: rgba(15,42,68,.03);
-      font-weight: 900;
-      color: var(--primary);
-    }
-
-    /* ===== Infographic (LAST inside unit) ===== */
-    .infographic{
-      margin-top: 16px;
-      padding-top: 12px;
-      border-top: 1px dashed var(--border);
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .infographic .cap{
-      font-weight: 900;
-      margin-bottom: 8px;
-      color: var(--muted);
-    }
+    /* Infographic */
     .infographic img{
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      border: 1px solid var(--border);
+      width:100%;
+      height:auto;
+      border-radius:16px;
       display:block;
-      background: #fff;
-    }
-    .infographic .hint{ margin-top: 8px; }
-
-    /* ===== Signature Authority Block (in place / end) ===== */
-    .signature-card{
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-top: 4px solid var(--primary);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow2);
-      padding: 22px 18px;
-      text-align: center;
-      margin-top: 18px;
-    }
-    .signature-card .label{
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 900;
-      margin-bottom: 6px;
-    }
-    .signature-card .name{
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--primary);
-      margin: 0 0 2px;
-    }
-    .signature-card .contact{
-      font-size: 15px;
-      margin: 0;
-      color: var(--text);
+      border:1px solid var(--border);
+      background:#fff;
     }
 
-    /* ===== Responsive ===== */
     @media (max-width: 980px){
-      .layout{ grid-template-columns: 1fr; }
-      aside{ position: static; }
-      .header-card{ padding: 22px 18px; }
-      #appTitle{ font-size: 24px; }
-    }
-
-    /* ===== Print ===== */
-    @media print{
-      body{ background:#fff !important; color:#000 !important; }
-      .wrap{ max-width: none; padding: 0; }
-      .layout{ grid-template-columns: 1fr; gap: 0; margin-top: 10px; }
-      aside{ display:none !important; }          /* Sidebar hidden */
-      .tabs{ display:none !important; }          /* Tabs hidden */
-      .header-card{ box-shadow:none !important; }
-      .card,.signature-card{
-        box-shadow:none !important;
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-      table{
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-      h2, .steps-title{
-        break-after: avoid;
-        page-break-after: avoid;
-      }
-      @page{ size: A4; margin: 14mm; }
+      .page{grid-template-columns:1fr}
+      .sidebar{position:relative; top:auto; order:-1; max-height: none;}
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
+  <div class="page">
 
-    <!-- HEADER (Anchors for Injection) -->
-    <section class="header-card" aria-label="header">
-      <div class="header-inner">
-        <h1 id="appTitle">عنوان المحتوى التدريبي</h1>
-        <p id="appSubtitle"></p>
-        <div class="header-divider"></div>
-      </div>
-    </section>
+    <!-- ===== SIDEBAR (مثبت في اليمين) ===== -->
+    <aside class="sidebar" aria-label="Sidebar">
+      <h3>الوحدات</h3>
+      <nav id="sidebarTOC">
+        <a class="toc-link active" href="index.html" data-page="index.html">الوحدة الأولى: إدارة الموارد البشرية</a>
+        <a class="toc-link" href="unit2.html" data-page="unit2.html">الوحدة الثانية: الاستقطاب</a>
+        <a class="toc-link" href="unit3.html" data-page="unit3.html">الوحدة الثالثة: التوظيف</a>
+        <a class="toc-link" href="unit4.html" data-page="unit4.html">الوحدة الرابعة: التدريب والتطوير</a>
+        <a class="toc-link" href="unit5.html" data-page="unit5.html">الوحدة الخامسة: تقييم الأداء</a>
+        <a class="toc-link" href="unit6.html" data-page="unit6.html">الوحدة السادسة: الترقية الوظيفية/المالية</a>
+        <a class="toc-link" href="unit7.html" data-page="unit7.html">الوحدة السابعة: الوصف الوظيفي</a>
+        <a class="toc-link" href="unit8.html" data-page="unit8.html">الوحدة الثامنة: نظام العمل السعودي</a>
+        <a class="toc-link" href="unit9.html" data-page="unit9.html">الوحدة التاسعة: التفرقة بين القرار الإداري والمخالفة النظامية</a>
+        <a class="toc-link" href="unit10.html" data-page="unit10.html">الوحدة العاشرة: المادة 77</a>
+        <a class="toc-link" href="unit11.html" data-page="unit11.html">الوحدة الحادية عشر: المادة 80</a>
+        <a class="toc-link" href="quiz1.html" data-page="quiz1.html">🧪 الاختبار الشامل</a>
+      </nav>
+    </aside>
 
-    <!-- LAYOUT -->
-    <section class="layout">
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main" id="mainContent">
 
-      <!-- SIDEBAR -->
-      <aside aria-label="sidebar">
-        <div class="side-head">
-          <p class="side-title">الوحدات</p>
-        </div>
+      <!-- ===== HEADER ===== -->
+      <header>
+        <h1>منهج إدارة الموارد البشرية الحديثة CBP</h1>
+      </header>
 
-        <div class="side-actions">
-          <button class="btn" id="printBtn" type="button">طباعة PDF</button>
-        </div>
-
-        <ul id="sidebarTOC" aria-label="table of contents"></ul>
-
-        <div class="side-note">* الشريط الجانبي وزر الطباعة يختفيان تمامًا عند الطباعة.</div>
-      </aside>
-
-      <!-- CONTENT -->
-      <main aria-label="content">
-        <div id="contentContainer"></div>
-        <div id="infographicContainer"></div>
-
+      <!-- ===== UNIT CONTENT ===== -->
+      <section class="card" id="unitContent">
+        <h2>الوحدة الأولى: إدارة الموارد البشرية (المنظومة المتكاملة)</h2>
+        <div class="muted" style="margin-top:-4px;margin-bottom:12px">Human Resource Management as an Integrated System</div>
         
-
-        <!-- SIGNATURE (Fixed place / end) -->
-        <div class="signature-card" aria-label="signature">
-          <div class="label">تم إعداد هذا المحتوى بواسطة</div>
-          <div class="name">أنس العضيبي</div>
-          <p class="contact">0505530803</p>
+        <div style="background:#e0f2fe;border:2px solid #7dd3fc;border-radius:12px;padding:14px;margin:12px 0;">
+          <h3 style="margin-top:0">🎯 الهدف (Objective)</h3>
+          <p>بنهاية هذه الوحدة، سيكون المتدرّب قادرًا على:</p>
+          <ul style="margin-bottom:0">
+            <li>فهم إدارة الموارد البشرية كنظام متكامل لا كإجراءات منفصلة</li>
+            <li>إدراك أثر الخلل الإداري المبكر على كامل دورة الحياة الوظيفية</li>
+            <li>التمييز بين الخطأ الفردي والخلل المنظومي</li>
+            <li>تحليل النزاعات الوظيفية بعقلية مهنية نظامية</li>
+          </ul>
         </div>
-      </main>
+        
+        <div style="background:#fef3c7;border:2px solid #fcd34d;border-radius:12px;padding:14px;margin:12px 0;">
+          <h3 style="margin-top:0">📘 المحتوى (Content)</h3>
+          
+          <p>عند سماع مصطلح إدارة الموارد البشرية، يظن كثير من الناس أنها تعني:</p>
+          <ul>
+            <li>التوظيف فقط</li>
+            <li>أو الرواتب</li>
+            <li>أو إنهاء الخدمة</li>
+          </ul>
+          
+          <div class="alert-danger">
+            <strong>🟥 تنبيه مهم (فهم خاطئ وخطير)</strong><br><br>
+            حصر إدارة الموارد البشرية في هذه الإجراءات فقط يؤدي إلى:
+            <ul style="margin-top:8px">
+              <li>قرارات عشوائية</li>
+              <li>ظلم إداري</li>
+              <li>نزاعات نظامية لاحقًا</li>
+            </ul>
+          </div>
+          
+          <p>
+          إدارة الموارد البشرية في حقيقتها هي النظام الذي ينظّم العلاقة بين الإنسان والمنشأة منذ التفكير في شغل الوظيفة وحتى خروجه منها خروجًا نظاميًا عادلًا.
+          </p>
+          
+          <div class="success-box">
+            <h4>🟩 خلاصة محورية</h4>
+            <p style="margin:0"><strong>إدارة الموارد البشرية لا تدير موظفًا</strong><br>
+            بل تدير <strong>دورة حياة وظيفية كاملة</strong>.</p>
+          </div>
+        </div>
+        
+        <div class="expert-box">
+          <h4>🟪 صندوق أسرار الخبراء — التحول التاريخي للمهنة</h4>
+          <p><strong>🟪 دهاء سوق العمل السعودي</strong></p>
+          <p><strong>قديمًا في المملكة:</strong></p>
+          <ul>
+            <li>الموارد البشرية = معقّب معاملات</li>
+            <li>التركيز: خطابات – توقيعات – حضور وانصراف</li>
+          </ul>
+          <p><strong>حاليًا:</strong></p>
+          <ul>
+            <li>الموارد البشرية = شريك استراتيجي</li>
+            <li>يشارك في: القرار، التقييم، الهيكلة، الحوكمة</li>
+          </ul>
+          <p style="margin-bottom:0"><strong style="color:#c53030">من بقي بعقلية "المعقب" سيسقط مهما كانت أنظمته.</strong></p>
+        </div>
+        
+        <div class="callout-question">
+          <div style="margin-bottom:10px"><strong>🟩 ما المقصود بدورة الحياة الوظيفية؟</strong></div>
+          
+          <p>هي المراحل التي يمر بها الموظف داخل المنشأة، وتشمل – كحد أدنى:</p>
+          <ul style="margin-bottom:0">
+            <li>تحديد الحاجة الوظيفية</li>
+            <li>الاستقطاب</li>
+            <li>التوظيف والتعاقد</li>
+            <li>التدريب والتطوير</li>
+            <li>تقييم الأداء</li>
+            <li>اتخاذ القرارات الإدارية</li>
+            <li>إنهاء الخدمة بطريقة نظامية</li>
+          </ul>
+        </div>
+        
+        <div class="alert-danger">
+          <strong>🟥 قاعدة خطيرة يجب الانتباه لها</strong><br><br>
+          أي خلل في مرحلة واحدة فقط ⇦ سينعكس لاحقًا في:
+          <ul style="margin-top:8px">
+            <li>ضعف أداء</li>
+            <li>قرارات خاطئة</li>
+            <li>أو قضية نظامية</li>
+          </ul>
+        </div>
+        
+        <h3>🟨 القصة التطبيقية: قصة "أحمد" والتحول الإداري</h3>
+        
+        <div class="story-box">
+          <h4>🟨 قصة من واقع سوق العمل</h4>
+          <p>قصة شاب يُدعى أحمد، بدأ عمله كسكرتير مؤقت في مكتب إداري بسيط.</p>
+          
+          <p><strong>عند دخوله المكتب لأول مرة، كان الوضع كالتالي:</strong></p>
+          <ul>
+            <li>ملفات ورقية مبعثرة</li>
+            <li>لا توجد أرشفة أو تنظيم</li>
+            <li>رائحة أكل داخل المكتب</li>
+            <li>لا توجد قاعة اجتماعات</li>
+            <li>الاجتماعات تُدار بعشوائية</li>
+          </ul>
+          
+          <p><strong>أحمد لم يكن مديرًا، ولا يملك صلاحيات، ولا طُلب منه تطوير أي شيء.</strong></p>
+          
+          <p>لكنه بدأ تدريجيًا بـ:</p>
+          <ul>
+            <li>أرشفة الملفات إلكترونيًا</li>
+            <li>تنظيم المستندات</li>
+            <li>تجهيز قاعة اجتماعات بسيطة</li>
+            <li>استخدام تقنيات الاجتماعات عن بُعد</li>
+            <li>تحسين صورة المكتب أمام الإدارة العليا</li>
+          </ul>
+          
+          <p><strong>مع الوقت، لاحظ رئيس مجلس الإدارة:</strong></p>
+          <ul>
+            <li>تحسن جودة الاجتماعات</li>
+            <li>وضوح القرارات</li>
+            <li>اختفاء الفوضى</li>
+            <li>تحسّن الصورة المؤسسية</li>
+          </ul>
+          
+          <p><strong>النتيجة:</strong></p>
+          <ul>
+            <li>تثبيت أحمد</li>
+            <li>ثم ترقيته</li>
+            <li>ثم رفع راتبه من 4,000 إلى 22,000 ريال</li>
+            <li>وتعيينه مدير مكتب رئيس مجلس الإدارة</li>
+          </ul>
+        </div>
+        
+        <h3>🧠 التحليل المهني للقصة</h3>
+        
+        <div class="success-box">
+          <h4>🟩 نقطة جوهرية</h4>
+          <p>هذه القصة لا تتحدث عن "بطل فردي"،<br>
+          بل تكشف <strong>غياب منظومة إدارية</strong> كانت يجب أن تقوم بالدور من البداية.</p>
+          <p style="margin-bottom:0">أحمد لم ينجح لأنه خارق،<br>
+          بل لأنه سدّ <strong>فراغًا منظوميًا</strong>.</p>
+        </div>
+        
+        <h3>⚖️ سؤال القرار (Decision)</h3>
+        <div class="alert-danger">
+          <strong>🟥 سؤال يجب التوقف عنده</strong><br><br>
+          هل نجاح أحمد:
+          <ul style="margin-top:8px">
+            <li>إنجاز فردي فقط؟</li>
+            <li>أم دليل على خلل سابق في منظومة الموارد البشرية؟ ولماذا؟</li>
+          </ul>
+        </div>
+        
+        <div class="expert-box">
+          <h4>🟪 صندوق أسرار الخبراء — قاعدة تنظيمية عملية</h4>
+          <p><strong>🟪 تُستخدم فعليًا في السوق</strong></p>
+          <ul>
+            <li>إذا تجاوز عدد موظفي الموارد البشرية 8 موظفين ⬅️ تُعد إدارة مستقلة</li>
+            <li>أقل من ذلك ⬅️ تُعد قسمًا</li>
+          </ul>
+          <p style="margin-bottom:0"><strong>تجاهل هذه القاعدة يؤدي إما إلى: تضخم إداري، أو ضعف صلاحيات وتمكين</strong></p>
+        </div>
+        
+        <div style="background:#ddd6fe;border:2px solid #a78bfa;border-radius:12px;padding:14px;margin:12px 0;">
+          <h3 style="margin-top:0">🧠 سؤال التحقق المعرفي (KC Question)</h3>
+          <p>أي العبارات التالية تعبّر بدقة عن جوهر القصة؟</p>
+          <ul style="list-style: none; padding-right: 0; margin-bottom:0">
+            <li><strong>A)</strong> أحمد موظف مجتهد فقط</li>
+            <li><strong>B)</strong> الإدارة كافأت الاجتهاد</li>
+            <li><strong>C)</strong> القصة تكشف غياب منظومة إدارية تم تعويضها فرديًا</li>
+            <li><strong>D)</strong> النجاح كان بسبب الحظ</li>
+          </ul>
+        </div>
+        
+        <h3>✅ التغذية الراجعة الصحيحة</h3>
+        <div class="success-box">
+          <h4>🟩 الإجابة الصحيحة: (C)</h4>
+          <p>القصة تكشف أن:</p>
+          <ul>
+            <li>التنظيم لم يكن مؤسسيًا</li>
+            <li>الاعتماد كان على اجتهاد الأفراد</li>
+            <li>إدارة الموارد البشرية لم تؤدِّ دورها كنظام</li>
+          </ul>
+          <p style="margin-bottom:0"><strong>الاجتهاد الفردي قد ينجح مؤقتًا، لكن المؤسسات لا تُبنى عليه.</strong></p>
+        </div>
+        
+        <div class="closing-box">
+          <h3>🏁 معيار الإتقان (Mastery Check)</h3>
+          <p class="muted" style="margin-top:-6px">إغلاق الوحدة — معيار الإتقان</p>
+          
+          <div style="background:rgba(255,255,255,0.7);border-radius:8px;padding:12px;margin-top:12px">
+            <p style="margin-top:0"><strong>وظيفة معيار الإتقان التعليمية:</strong></p>
+            <ul>
+              <li>تثبيت المفاهيم النهائية</li>
+              <li>تحديد شرط الإتقان بوضوح</li>
+              <li>منع الانتقال قبل الاستيعاب</li>
+            </ul>
+          </div>
+          
+          <p style="margin-top:12px">يُعتبر المتدرّب متمكنًا من هذه الوحدة إذا استطاع:</p>
+          <ul>
+            <li>شرح معنى إدارة الموارد البشرية كنظام متكامل</li>
+            <li>تعداد مراحل دورة الحياة الوظيفية بشكل صحيح</li>
+            <li>التمييز بين الخطأ الفردي والخلل المنظومي</li>
+            <li>تحليل قصة أحمد وتحديد الدروس المستفادة</li>
+            <li>الدفاع عن قرار مهني عادل عند تحليل حالة نزاع وظيفي مشابهة</li>
+          </ul>
+        </div>
+      </section>
 
-    </section>
+      <!-- ===== INFOGRAPHIC ===== -->
+      <section class="card infographic" id="infographicSection">
+        <h2>📌 الإنفوجرافيك (Infographic)</h2>
+        <img id="infographicImg" src="" alt="Infographic">
+        <div class="muted" id="infographicFallback" style="display:none;margin-top:10px;"></div>
+      </section>
+
+      <!-- ===== SIGNATURE ===== -->
+      <div class="signature-box" id="signature">
+        <div class="signature-label">تم إعداد هذا المحتوى بواسطة</div>
+        <div class="signature-name">أنس العضيبي</div>
+        <div class="signature-contact">جوال: 0505530803</div>
+      </div>
+
+    </main>
+
   </div>
 
   <script>
-    /*****************************************************************
-     * Template Data Contract v1.0 (Inline Edition)
-     *
-     * mode: "days" | "modules"   => Tabs labels only
-     * tabs: [{ id, label, sections:[...] }]
-     *
-     * SECTION:
-     * - id, title
-     * - unitName: used for Infographic file: assets/<unitName>.png
-     * - badges: ["Required", ...] (optional)
-     * - steps: [ ... ] (optional)
-     * - bodyHtml: (required) you place inline callouts anywhere here
-     * - infographic: true/false (if true => appended LAST inside the unit)
-     *
-     * Inline callouts (use inside bodyHtml):
-     *  - <div class="callout callout-danger">...</div>
-     *  - <div class="callout callout-success">...</div>
-     *****************************************************************/
-
-    const TEMPLATE_DATA = {
-  "mode": "modules",
-  "title": "منهج إدارة الموارد البشرية الحديثة CBP",
-  "subtitle": "بنهاية هذا المنهج ستكون قادرًا على فهم وتطبيق أساسيات إدارة الموارد البشرية عمليًا.",
-  "tabs": [
-    {
-      "id": "u1",
-      "label": "المنهج",
-      "sections": [
-        {
-          "id": "u1_main",
-          "title": "الوحدات وLearning Objectives",
-          "unitName": "الوحدة_الأولى",
-          "badges": [],
-          "steps": [],
-          "bodyHtml": "<h3 class=\"steps-title\"></h3><div class=\"callout callout-info\"><div class=\"label\"><a href=\"#unit1\">الوحدة الأولى: نظام العمل والهيكل القضائي العمالي</a></div><p><strong>Learning Objectives</strong></p><ul><li>فهم الإطار القانوني المنظم للعلاقة بين العامل وصاحب العمل.</li><li>التعرف على الهيكل القضائي العمالي واختصاصات جهاته.</li><li>إدراك أثر الالتزام بالأحكام والتنفيذ على السلامة النظامية للمنشأة.</li></ul></div><div class=\"callout callout-info\"><div class=\"label\"><a href=\"unit2.html\">الوحدة الثانية: إدارة التعاقد والمدد النظامية</a></div><p><strong>Learning Objectives</strong></p><ul><li>التمييز بين أنواع العقود وآثار كل نوع.</li><li>فهم قواعد المدد والتحوّل وفترة التجربة.</li><li>إدراك مخاطر الشروط التعاقدية المخالفة أو غير المتوازنة.</li></ul></div><div class=\"callout callout-info\"><div class=\"label\"><a href=\"unit3.html\">الوحدة الثالثة: الأجور، الاستحقاقات، وحسابات نهاية الخدمة</a></div><p><strong>Learning Objectives</strong></p><ul><li>التمييز بين الأجر الأساسي والأجر الفعلي وآثار كل منهما.</li><li>فهم قواعد العمل الإضافي واحتسابه.</li><li>تفسير منطق مكافأة نهاية الخدمة حسب الاستقالة/الإنهاء.</li></ul></div><div class=\"callout callout-info\"><div class=\"label\"><a href=\"unit4.html\">الوحدة الرابعة: العمليات الرقمية والمنصات الحكومية</a></div><p><strong>Learning Objectives</strong></p><ul><li>فهم دور المنصات الرقمية في ضبط العلاقة العمالية.</li><li>الإلمام بوظائف قوى ومدد والتأمينات.</li><li>إدراك أثر الربط الإلكتروني على الامتثال وتقليل المخاطر.</li></ul></div><div class=\"callout callout-info\"><div class=\"label\"><a href=\"unit5.html\">الوحدة الخامسة: التنظيم الداخلي والحوكمة الإدارية</a></div><p><strong>Learning Objectives</strong></p><ul><li>فهم أثر التنظيم الداخلي على الاستقرار وتقليل النزاعات.</li><li>إدراك دور الحوكمة في تقليل التسرب الوظيفي.</li><li>ربط الهيكل والوصف الوظيفي بالأداء والمساءلة.</li></ul></div><div class=\"callout callout-info\"><div class=\"label\"><a href=\"unit6.html\">الوحدة السادسة: الانضباط الإداري وإدارة المخاطر العمالية</a></div><p><strong>Learning Objectives</strong></p><ul><li>فهم الانضباط الإداري كأداة وقائية.</li><li>الإلمام بإجراءات التحقيق والإثبات.</li><li>التمييز بين الفصل والإنهاء والتسوية وآثارها.</li></ul></div><div class=\"header-divider\"></div><h3 class=\"steps-title\" id=\"unit1\">الوحدة الأولى: نظام العمل والهيكل القضائي العمالي</h3><div class=\"callout callout-info\">\n<div class=\"label\">Learning Objectives (Recap)</div>\n<ul>\n<li>فهم الإطار القانوني المنظم للعلاقة بين العامل وصاحب العمل.</li>\n<li>التعرف على الهيكل القضائي العمالي واختصاصات جهاته.</li>\n<li>إدراك أثر الالتزام بالأحكام والتنفيذ على السلامة النظامية للمنشأة.</li>\n</ul></div>\n<h3 class=\"steps-title\">Core Content</h3>\n<p>يشكّل نظام العمل السعودي المرجعية الأساسية التي تحكم العلاقة التعاقدية بين العامل وصاحب العمل، ويُبنى عليه توصيف الحقوق والواجبات وآليات الفصل في النزاعات. لا تقتصر أهمية النظام على النصوص، بل تمتد إلى كيفية تطبيقها داخل المسار القضائي والتنفيذي.</p>\n<p>يبدأ المسار عادة بمحاولات التسوية الودية، ثم ينتقل إلى المحاكم العمالية المختصة بالفصل في النزاعات. بعد صدور الحكم، ينتقل الملف إلى محكمة التنفيذ التي تتولى تنفيذ الأحكام جبريًا متى اكتسبت الصفة النهائية.</p>\n<p>ضمن اختصاصات المحاكم العمالية النظر في المطالبات المالية والمزايا المرتبطة بالعقد. القاضي لا يحكم بالعرف أو النية، بل بما هو منصوص عليه.</p>\n<p>تلعب التأمينات الاجتماعية دورًا رقابيًا في توثيق العلاقة الوظيفية وربطها بالاشتراكات ومؤشرات السعودة. أي خلل في تحديث البيانات قد يُفسَّر كمخالفة جسيمة.</p>\n<h3 class=\"steps-title\">قصص تطبيقية وتوضيحية</h3><div class=\"callout callout-info\"><div class=\"label\">قصة تطبيقية — محكمة التنفيذ والجباية الجبرية</div><p><strong>النظام الذي استندت عليه:</strong> نظام التنفيذ – إلزامية الأحكام القضائية</p><p><strong>القصة:</strong> صدر حكم قضائي نهائي ضد شركة بدفع 260,000 ريال لموظف. تجاهلت الشركة التنفيذ، فقامت محكمة التنفيذ بتجميد حسابات الشركة وسحب المبلغ آليًا دون إذنها.</p><p><strong>ماذا نستفيد من القصة:</strong> الالتزام بالأحكام القضائية واجب، والمماطلة تؤدي إلى تنفيذ جبري دون تحكم.</p></div><div class=\"callout callout-info\"><div class=\"label\">قصة توضيحية — تذاكر السفر الضائعة</div><p><strong>النظام الذي استندت عليه:</strong> نظام العمل – الالتزامات التعاقدية</p><p><strong>القصة:</strong> طالب موظف بتذاكر سفر سنوية أمام القضاء، لكن القاضي رفض الحكم بها لعدم ورودها في العقد، ولأن النظام لا يلزم بها إلا عند الاستقدام ونهاية الخدمة.</p><p><strong>ماذا نستفيد من القصة:</strong> الحقوق العمالية تُحدد بالعقد والنظام لا بالعُرف.</p></div><div class=\"callout callout-info\"><div class=\"label\">قصة تحذيرية — نسيان إسقاط الاسم من التأمينات</div><p><strong>النظام الذي استندت عليه:</strong> نظام التأمينات الاجتماعية</p><p><strong>القصة:</strong> مواطن عمل في شركة ثم سافر للتجارة لمدة سنة، وعند عودته وجد اسمه مسجلًا في التأمينات والشركة تستفيد من نسب السعودة؛ فغرمت التأمينات الشركة 20,000 ريال وألغت المدة من سجله.</p><p><strong>ماذا نستفيد من القصة:</strong> تحديث بيانات الموظفين التزام نظامي يمنع الغرامات.</p></div><div class=\"callout callout-danger\">\n<div class=\"label\">تنبيه — معلومات يجب الانتباه لها</div>\n<ul>\n<li>التأخير في تنفيذ الأحكام أو إهمال تحديث البيانات النظامية مخاطرة قانونية مباشرة.</li>\n</ul></div>\n<div class=\"callout callout-success\">\n<div class=\"label\">تركيز — نقاط يجب التركيز عليها</div>\n<ul>\n<li>توثيق جميع الحقوق والالتزامات داخل العقد.</li>\n<li>الالتزام الفوري بتنفيذ الأحكام القضائية.</li>\n<li>تحديث بيانات العاملين لدى الجهات الرسمية دون تأخير.</li>\n</ul></div>\n<h3 class=\"steps-title\">Key Takeaways</h3>\n<ul>\n<li>القضاء العمالي يحكم بالنص لا بالعرف.</li>\n<li>محكمة التنفيذ لا تقبل التسويف.</li>\n<li>أي ميزة غير مكتوبة غالبًا غير محمية.</li>\n<li>الإهمال الإداري في التأمينات قد يتحول لمخالفة.</li>\n</ul>",
-          "infographic": true
-        }
-      ]
-    }
-  ]
-};
-
-    const elTitle = document.getElementById("appTitle");
-    const elSubtitle = document.getElementById("appSubtitle");
-    const elTOC = document.getElementById("sidebarTOC");
-    const elContent = document.getElementById("contentContainer");
-    const elInf = document.getElementById("infographicContainer");
-    document.getElementById("printBtn").addEventListener("click", () => window.print());
-
-    const sanitizeId = (id) => String(id).replace(/[^a-zA-Z0-9_-]/g, "_");
-
-    function renderApp(data){
-  elTitle.textContent = data.title || "";
-  elSubtitle.textContent = data.subtitle || "";
-  elSubtitle.style.display = (data.subtitle ? "block" : "none");
-  if (!data.subtitle) { elSubtitle.style.display = "none"; } else { elSubtitle.style.display = "block"; }
-  if (!elSubtitle.textContent.trim()) { elSubtitle.style.display = "none"; }
-  const tab = (data.tabs || [])[0];
-  if (tab){
-    renderContent(tab);
-  }
-  renderTOC();
-}
-
-    function renderTOC(){
-  elTOC.innerHTML = '<li><a href="index.html" aria-current="page">الوحدة الأولى: نظام العمل والهيكل القضائي العمالي</a></li><li><a href="unit2.html" >الوحدة الثانية: إدارة التعاقد والمدد النظامية</a></li><li><a href="unit3.html" >الوحدة الثالثة: الأجور، الاستحقاقات، وحسابات نهاية الخدمة</a></li><li><a href="unit4.html" >الوحدة الرابعة: العمليات الرقمية والمنصات الحكومية</a></li><li><a href="unit5.html" >الوحدة الخامسة: التنظيم الداخلي والحوكمة الإدارية</a></li><li><a href="unit6.html" >الوحدة السادسة: الانضباط الإداري وإدارة المخاطر العمالية</a></li>';
-}
-
-    function makeBadges(badges){
-      if (!badges || !badges.length) return null;
-      const wrap = document.createElement("div");
-      wrap.className = "badges";
-      badges.forEach(txt => {
-        const s = document.createElement("span");
-        s.className = "badge";
-        s.textContent = txt;
-        wrap.appendChild(s);
+    // Active link
+    (function(){
+      const file = (location.pathname.split('/').pop() || 'index.html');
+      document.querySelectorAll('#sidebarTOC .toc-link').forEach(a=>{
+        if(a.getAttribute('data-page') === file) a.classList.add('active');
       });
-      return wrap;
-    }
+    })();
 
-    function makeSteps(steps){
-      if (!steps || !steps.length) return null;
-      const title = document.createElement("div");
-      title.className = "steps-title";
-      title.textContent = "التسلسل المنهجي";
+    // Infographic resolver
+    (function(){
+      const file = decodeURIComponent((location.pathname.split('/').pop() || 'index.html'));
+      let base = file.replace(/\.html?$/i,'');
+      base = base.replace(/\s*\(\d+\)$/, '').trim();
+      const img = document.getElementById('infographicImg');
+      const fb  = document.getElementById('infographicFallback');
+      if(!img) return;
 
-      const ol = document.createElement("ol");
-      ol.className = "steps";
-      steps.forEach(s => {
-        const li = document.createElement("li");
-        li.textContent = s;
-        ol.appendChild(li);
-      });
-
-      const wrap = document.createElement("div");
-      wrap.appendChild(title);
-      wrap.appendChild(ol);
-      return wrap;
-    }
-
-    function makeInfographic(unitName){
-      const box = document.createElement("div");
-      box.className = "infographic";
-
-      const cap = document.createElement("div");
-      cap.className = "cap";
-      cap.textContent = "📌 الإنفوجرافيك (Infographic)";
-
-      const img = document.createElement("img");
-      img.alt = "Infographic — " + unitName;
-      img.src = "assets/" + unitName + ".png";
-
-      const hint = document.createElement("div");
-      hint.className = "hint";
-      hint.textContent = "الملف المطلوب: assets/" + unitName + ".png";
-
-      img.addEventListener("error", () => {
-        img.style.display = "none";
-        hint.textContent = "لم يتم العثور على الصورة: assets/" + unitName + ".png";
-      });
-
-      box.appendChild(cap);
-      box.appendChild(img);
-      box.appendChild(hint);
-      return box;
-    }
-
-    function renderContent(tab){
-      elContent.innerHTML = "";
-      (tab.sections || []).forEach(sec => {
-        const card = document.createElement("section");
-        card.className = "card";
-        card.id = sanitizeId(sec.id);
-
-        const h2 = document.createElement("h2");
-        h2.textContent = sec.title;
-        card.appendChild(h2);
-
-        const badges = makeBadges(sec.badges);
-        if (badges) card.appendChild(badges);
-
-        // bodyHtml (Inline callouts live here)
-        const body = document.createElement("div");
-        body.innerHTML = sec.bodyHtml || "";
-        card.appendChild(body);
-
-        // steps (optional)
-        const steps = makeSteps(sec.steps);
-        if (steps) card.appendChild(steps);
-
-        elContent.appendChild(card);
-      });
-
-      // Infographic section (fixed: before signature)
-      const first = (tab.sections || [])[0] || {};
-      const unit = first.unitName || sanitizeId(first.id || tab.id || 'unit');
-      elInf.innerHTML = '';
-      const infCard = document.createElement('section');
-      infCard.className = 'card';
-      infCard.appendChild(makeInfographic(unit));
-      elInf.appendChild(infCard);
-
-    }
-
-
-    renderApp(TEMPLATE_DATA);
+      const path = `assets/${base}.png`;
+      img.src = path;
+      img.onerror = function(){
+        img.style.display = 'none';
+        fb.style.display = 'block';
+        fb.textContent = `لم يتم العثور على ملف الإنفوجرافيك: ${path}`;
+      };
+    })();
   </script>
 </body>
 </html>
