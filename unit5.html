@@ -3,607 +3,505 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>الوحدة الخامسة: التنظيم الداخلي والحوكمة الإدارية</title>
+  <title>الوحدة الخامسة: تقييم الأداء - منهج إدارة الموارد البشرية CBP</title>
 
   <style>
     :root{
-      /* Consultant-Grade Visual Spec v1.0 */
-      --primary: #0F2A44;
-      --secondary: #3A5F8A;
-      --success: #2F7D5A;
-      --alert: #B23A3A;
-
-      --bg: #F7F9FC;
-      --surface: #FFFFFF;
-      --text: #1F2937;
-      --muted: #6B7280;
-      --border: #E5E7EB;
-
-      --radius: 14px;
-      --shadow: 0 10px 24px rgba(15,42,68,.08);
-      --shadow2: 0 6px 14px rgba(15,42,68,.07);
-
-      --maxw: 1200px;
-      --gap: 18px;
-
-      --font: "Cairo","Tajawal",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+      --bg:#f0f4f8;
+      --card:#ffffff;
+      --text:#2d3748;
+      --muted:#718096;
+      --border:#cbd5e0;
+      --accent:#4299e1;
+      --accent-light:#bee3f8;
+      --danger-bg:#fff5f5;
+      --danger-border:#feb2b2;
+      --danger-text:#c53030;
+      --closing-bg:#ebf8ff;
+      --closing-border:#90cdf4;
+      --radius:12px;
+      --signature-bg:#edf2f7;
+      --signature-border:#a0aec0;
+      --expert-box-bg:#f3e8ff;
+      --expert-box-border:#a78bfa;
+      --story-box-bg:#fffbeb;
+      --story-box-border:#fcd34d;
     }
-
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.85;
+      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
     }
-
-    .wrap{
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 26px 18px 36px;
-    }
-
-    /* ===== Header (Card / Cover Block) ===== */
-    .header-card{
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 28px 32px;
-      margin-bottom: 16px;
-      position: relative;
-      overflow: hidden;
-    }
-    .header-card:before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: linear-gradient(135deg, rgba(15,42,68,.06), rgba(58,95,138,.04));
-      pointer-events:none;
-    }
-    .header-inner{ position:relative; }
-
-    #appTitle{
-      margin:0;
-      font-size: 30px;
-      font-weight: 800;
-      color: var(--primary);
-      letter-spacing: .2px;
-      text-align:center;
-    }
-    #appSubtitle{
-      margin: 8px 0 0;
-      font-size: 15px;
-      color: var(--muted);
-      text-align:center;
-    }
-    .header-divider{
-      margin: 18px auto 0;
-      height: 1px;
-      width: min(720px, 92%);
-      background: var(--border);
-    }
-
-    /* ===== Tabs ===== */
-    .tabs{
-      margin-top: 16px;
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-      justify-content: center;
-    }
-    .tab-btn{
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--primary);
-      padding: 9px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      font: inherit;
-      font-size: 13px;
-      transition: background .15s ease, border-color .15s ease;
-    }
-    .tab-btn:hover{
-      background: rgba(15,42,68,.04);
-      border-color: rgba(15,42,68,.20);
-    }
-    .tab-btn[aria-selected="true"]{
-      background: rgba(15,42,68,.08);
-      border-color: rgba(15,42,68,.30);
-      font-weight: 800;
-    }
-
-    /* ===== Layout (Sidebar + Content) ===== */
-    .layout{
+    a{color:inherit;text-decoration:none}
+    .page{
+      max-width:1200px;
+      margin:24px auto;
+      padding:0 16px;
       display:grid;
-      grid-template-columns: 300px 1fr; /* sidebar on the right (RTL) */
-      gap: var(--gap);
+      grid-template-columns: 320px 1fr;
+      gap:16px;
       align-items:start;
-      margin-top: 14px;
     }
-
-    /* ===== Sidebar ===== */
-    aside{
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow2);
-      padding: 14px;
-      position: sticky;
-      top: 14px;
+    header{
+      grid-column:1 / -1;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:22px 22px;
+      text-align:center;
     }
-
-    .side-head{
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-    .side-title{
+    header h1{
       margin:0;
-      font-size: 13px;
-      font-weight: 900;
-      color: var(--primary);
+      font-size:26px;
+      letter-spacing:.2px;
     }
 
-    .side-actions{
-      display:flex;
-      gap: 10px;
-      margin-bottom: 12px;
+    .main{
+      background:transparent;
+      min-height:200px;
     }
-    .btn{
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--primary);
-      font: inherit;
-      font-size: 13px;
-      cursor: pointer;
-      transition: background .15s ease, border-color .15s ease;
+    .sidebar{
+      position:sticky;
+      top:16px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:14px;
+      max-height: calc(100vh - 32px);
+      overflow-y: auto;
     }
-    .btn:hover{
-      background: rgba(15,42,68,.04);
-      border-color: rgba(15,42,68,.20);
+    .sidebar h3{
+      margin:6px 0 12px;
+      font-size:16px;
+      color:var(--muted);
     }
-
-    #sidebarTOC{
-      list-style:none;
-      margin:0;
-      padding:0;
-      display:flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    #sidebarTOC a{
+    #sidebarTOC{display:flex;flex-direction:column;gap:10px}
+    .toc-link{
       display:block;
-      padding: 10px 10px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--text);
-      text-decoration:none;
-      font-size: 13px;
-      transition: background .15s ease, border-color .15s ease;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      font-size:14px;
+      line-height:1.35;
+      transition: all 0.2s ease;
     }
-    #sidebarTOC a:hover{
-      background: rgba(15,42,68,.04);
-      border-color: rgba(15,42,68,.20);
+    .toc-link:hover{
+      border-color:var(--accent);
+      background:var(--accent-light);
     }
-
-    #sidebarTOC a[aria-current="page"]{
-      background: rgba(15,42,68,.08);
-      border-color: rgba(15,42,68,.30);
-      font-weight: 800;
+    .toc-link.active{
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(66,153,225,.15);
+      font-weight:700;
+      background:var(--accent-light);
     }
-    .side-note{
-      margin-top: 10px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* ===== Content Cards ===== */
-    main{ min-width: 0; }
 
     .card{
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow2);
-      padding: 22px 22px 18px;
-      margin-bottom: 14px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      margin-bottom:14px;
     }
     .card h2{
-      margin: 0 0 10px;
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--secondary);
+      margin:0 0 10px;
+      font-size:18px;
+      color:var(--accent);
     }
-    .card p{ margin: 10px 0; }
+    .card h3{
+      margin:16px 0 8px;
+      font-size:16px;
+    }
+    .muted{color:var(--muted)}
+    ul{margin:10px 0 0 0; padding:0 18px}
+    li{margin:6px 0}
 
-    .badges{ display:flex; flex-wrap:wrap; gap: 8px; margin: 10px 0 8px; }
-    .badge{
-      font-size: 12px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(15,42,68,.03);
-      color: var(--primary);
-      font-weight: 700;
+    /* Highlight blocks */
+    .alert-danger{
+      background:var(--danger-bg);
+      border:1px solid var(--danger-border);
+      color:var(--danger-text);
+      border-radius:12px;
+      padding:12px 14px;
+      margin:10px 0;
+      font-weight:600;
+    }
+    .callout-question{
+      border:1px dashed var(--accent);
+      background:#f7fafc;
+      border-radius:12px;
+      padding:12px 14px;
+      margin:10px 0;
+      font-weight:700;
+    }
+    .closing-box{
+      background:var(--closing-bg);
+      border:2px solid var(--closing-border);
+      border-radius:14px;
+      padding:16px;
+      margin-top:14px;
+    }
+    .closing-box h3{margin-top:0;color:var(--accent)}
+    
+    /* Expert Box */
+    .expert-box{
+      background:var(--expert-box-bg);
+      border:2px solid var(--expert-box-border);
+      border-radius:12px;
+      padding:14px;
+      margin:12px 0;
+    }
+    .expert-box h4{
+      margin:0 0 8px;
+      color:#7c3aed;
+      font-size:15px;
+    }
+    
+    /* Story Box */
+    .story-box{
+      background:var(--story-box-bg);
+      border:2px solid var(--story-box-border);
+      border-radius:12px;
+      padding:14px;
+      margin:12px 0;
+    }
+    .story-box h4{
+      margin:0 0 8px;
+      color:#d97706;
+      font-size:15px;
+    }
+    
+    /* Success Box */
+    .success-box{
+      background:#ecfdf5;
+      border:2px solid #bbf7d0;
+      border-radius:12px;
+      padding:14px;
+      margin:12px 0;
+      color:#065f46;
+    }
+    .success-box h4{
+      margin:0 0 8px;
+      color:#065f46;
+      font-size:15px;
+    }
+    
+    /* Signature Box */
+    .signature-box{
+      background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border:1px solid var(--signature-border);
+      border-radius:var(--radius);
+      padding:20px;
+      margin-top:24px;
+      text-align:center;
+      color:#ffffff;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .signature-box .signature-label{
+      font-size:14px;
+      opacity:0.9;
+      margin-bottom:8px;
+    }
+    .signature-box .signature-name{
+      font-size:20px;
+      font-weight:700;
+      margin:8px 0;
+    }
+    .signature-box .signature-contact{
+      font-size:14px;
+      opacity:0.9;
+      margin-top:6px;
+      direction:ltr;
     }
 
-    /* ===== Inline Callouts (place where needed) ===== */
-    .callout{
-      margin: 14px 0;
-      padding: 14px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #fff;
-    }
-    .callout .label{
-      font-weight: 900;
-      font-size: 13px;
-      margin-bottom: 8px;
-    }
-    .callout ul{ margin:0; padding-right: 18px; }
-
-    .callout-danger{
-      background: rgba(178,58,58,0.08);
-      border-color: rgba(178,58,58,0.25);
-      border-right: 4px solid var(--alert);
-    }
-    .callout-danger .label{ color: #7A1F1F; }
-
-    .callout-success{
-      background: rgba(47,125,90,0.08);
-      border-color: rgba(47,125,90,0.25);
-      border-right: 4px solid var(--success);
-    }
-    .callout-success .label{ color: #1F5B43; }
-
-    .callout-info{
-      background: rgba(58,95,138,0.08);
-      border-color: rgba(58,95,138,0.22);
-      border-right: 4px solid var(--secondary);
-    }
-    .callout-info .label{ color: var(--primary); }
-
-    /* ===== Steps ===== */
-    .steps-title{
-      margin: 16px 0 8px;
-      font-weight: 900;
-      color: var(--primary);
-    }
-    .steps{
-      margin: 0;
-      padding-right: 22px;
-    }
-    .steps li{ margin: 6px 0; }
-
-    /* ===== Tables ===== */
-    table{
-      width: 100%;
-      border-collapse: collapse;
-      margin: 12px 0;
-      font-size: 13px;
-    }
-    th,td{
-      border: 1px solid var(--border);
-      padding: 10px 10px;
-      vertical-align: top;
-    }
-    th{
-      background: rgba(15,42,68,.03);
-      font-weight: 900;
-      color: var(--primary);
-    }
-
-    /* ===== Infographic (LAST inside unit) ===== */
-    .infographic{
-      margin-top: 16px;
-      padding-top: 12px;
-      border-top: 1px dashed var(--border);
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .infographic .cap{
-      font-weight: 900;
-      margin-bottom: 8px;
-      color: var(--muted);
-    }
+    /* Infographic */
     .infographic img{
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      border: 1px solid var(--border);
+      width:100%;
+      height:auto;
+      border-radius:16px;
       display:block;
-      background: #fff;
-    }
-    .infographic .hint{ margin-top: 8px; }
-
-    /* ===== Signature Authority Block (in place / end) ===== */
-    .signature-card{
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-top: 4px solid var(--primary);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow2);
-      padding: 22px 18px;
-      text-align: center;
-      margin-top: 18px;
-    }
-    .signature-card .label{
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 900;
-      margin-bottom: 6px;
-    }
-    .signature-card .name{
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--primary);
-      margin: 0 0 2px;
-    }
-    .signature-card .contact{
-      font-size: 15px;
-      margin: 0;
-      color: var(--text);
+      border:1px solid var(--border);
+      background:#fff;
     }
 
-    /* ===== Responsive ===== */
     @media (max-width: 980px){
-      .layout{ grid-template-columns: 1fr; }
-      aside{ position: static; }
-      .header-card{ padding: 22px 18px; }
-      #appTitle{ font-size: 24px; }
-    }
-
-    /* ===== Print ===== */
-    @media print{
-      body{ background:#fff !important; color:#000 !important; }
-      .wrap{ max-width: none; padding: 0; }
-      .layout{ grid-template-columns: 1fr; gap: 0; margin-top: 10px; }
-      aside{ display:none !important; }          /* Sidebar hidden */
-      .tabs{ display:none !important; }          /* Tabs hidden */
-      .header-card{ box-shadow:none !important; }
-      .card,.signature-card{
-        box-shadow:none !important;
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-      table{
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-      h2, .steps-title{
-        break-after: avoid;
-        page-break-after: avoid;
-      }
-      @page{ size: A4; margin: 14mm; }
+      .page{grid-template-columns:1fr}
+      .sidebar{position:relative; top:auto; order:-1; max-height: none;}
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
+  <div class="page">
 
-    <!-- HEADER (Anchors for Injection) -->
-    <section class="header-card" aria-label="header">
-      <div class="header-inner">
-        <h1 id="appTitle">عنوان المحتوى التدريبي</h1>
-        <p id="appSubtitle"></p>
-        <div class="header-divider"></div>
-      </div>
-    </section>
+    <!-- ===== SIDEBAR (مثبت في اليمين) ===== -->
+    <aside class="sidebar" aria-label="Sidebar">
+      <h3>الوحدات</h3>
+      <nav id="sidebarTOC">
+        <a class="toc-link" href="index.html" data-page="index.html">الوحدة الأولى: إدارة الموارد البشرية</a>
+        <a class="toc-link" href="unit2.html" data-page="unit2.html">الوحدة الثانية: الاستقطاب</a>
+        <a class="toc-link" href="unit3.html" data-page="unit3.html">الوحدة الثالثة: التوظيف</a>
+        <a class="toc-link" href="unit4.html" data-page="unit4.html">الوحدة الرابعة: التدريب والتطوير</a>
+        <a class="toc-link active" href="unit5.html" data-page="unit5.html">الوحدة الخامسة: تقييم الأداء</a>
+        <a class="toc-link" href="unit6.html" data-page="unit6.html">الوحدة السادسة: الترقية الوظيفية/المالية</a>
+        <a class="toc-link" href="unit7.html" data-page="unit7.html">الوحدة السابعة: الوصف الوظيفي</a>
+        <a class="toc-link" href="unit8.html" data-page="unit8.html">الوحدة الثامنة: نظام العمل السعودي</a>
+        <a class="toc-link" href="unit9.html" data-page="unit9.html">الوحدة التاسعة: التفرقة بين القرار الإداري والمخالفة النظامية</a>
+        <a class="toc-link" href="unit10.html" data-page="unit10.html">الوحدة العاشرة: المادة 77</a>
+        <a class="toc-link" href="unit11.html" data-page="unit11.html">الوحدة الحادية عشر: المادة 80</a>
+        <a class="toc-link" href="quiz1.html" data-page="quiz1.html">🧪 الاختبار الشامل</a>
+      </nav>
+    </aside>
 
-    <!-- LAYOUT -->
-    <section class="layout">
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main" id="mainContent">
 
-      <!-- SIDEBAR -->
-      <aside aria-label="sidebar">
-        <div class="side-head">
-          <p class="side-title">الوحدات</p>
-        </div>
+      <!-- ===== HEADER ===== -->
+      <header>
+        <h1>منهج إدارة الموارد البشرية الحديثة CBP</h1>
+      </header>
 
-        <div class="side-actions">
-          <button class="btn" id="printBtn" type="button">طباعة PDF</button>
-        </div>
-
-        <ul id="sidebarTOC" aria-label="table of contents"></ul>
-
-        <div class="side-note">* الشريط الجانبي وزر الطباعة يختفيان تمامًا عند الطباعة.</div>
-      </aside>
-
-      <!-- CONTENT -->
-      <main aria-label="content">
-        <div id="contentContainer"></div>
-        <div id="infographicContainer"></div>
-
+      <!-- ===== UNIT CONTENT ===== -->
+      <section class="card" id="unitContent">
+        <h2>الوحدة الخامسة: تقييم الأداء (Performance Evaluation)</h2>
+        <div class="muted" style="margin-top:-4px;margin-bottom:12px">Performance Evaluation — القياس العادل قبل القرار</div>
         
-
-        <!-- SIGNATURE (Fixed place / end) -->
-        <div class="signature-card" aria-label="signature">
-          <div class="label">تم إعداد هذا المحتوى بواسطة</div>
-          <div class="name">أنس العضيبي</div>
-          <p class="contact">0505530803</p>
+        <div style="background:#e0f2fe;border:2px solid #7dd3fc;border-radius:12px;padding:14px;margin:12px 0;">
+          <h3 style="margin-top:0">🎯 الهدف (Objective)</h3>
+          <p>بنهاية هذه الوحدة، سيكون المتدرّب قادرًا على:</p>
+          <ul style="margin-bottom:0">
+            <li>فهم تقييم الأداء كعملية قياس منهجية لا رأيًا شخصيًا.</li>
+            <li>إدراك أن التقييم أداة قرار إداري (تطوير/ترقية/إنذار/إنهاء) وليس نموذجًا شكليًا.</li>
+            <li>التمييز بين تقييم مبني على معايير وشواهد وتقييم مبني على انطباعات.</li>
+            <li>كشف أخطاء التقييم التي تقود إلى ظلم إداري وتسرب وظيفي.</li>
+          </ul>
         </div>
-      </main>
+        
+        <div style="background:#fef3c7;border:2px solid #fcd34d;border-radius:12px;padding:14px;margin:12px 0;">
+          <h3 style="margin-top:0">📘 المحتوى (Content)</h3>
+          
+          <p>تقييم الأداء هو مقارنة نتائج عمل الموظف بـ متطلبات محددة مسبقًا باستخدام:</p>
+          <ul>
+            <li><strong>معايير واضحة</strong> (What)</li>
+            <li><strong>مؤشرات قابلة للقياس</strong> (How)</li>
+            <li><strong>شواهد موثقة</strong> (Evidence)</li>
+            <li><strong>اتساق في التطبيق</strong> (Consistency)</li>
+          </ul>
+        </div>
+        
+        <div class="success-box">
+          <h4>🟩 قاعدة محورية</h4>
+          <p><strong>التقييم العادل = معايير + مؤشرات + شواهد + اتساق.</strong></p>
+          <p style="margin:0">بدونها، يتحول التقييم إلى رأي لا يصلح لبناء قرار.</p>
+        </div>
+        
+        <div class="expert-box">
+          <h4>🟪 صندوق أسرار الخبراء — تفاوت فترات التقييم</h4>
+          <p><strong>🟪 ممارسة تشغيلية صحيحة</strong></p>
+          <p>ليس كل قطاع يُقيَّم بنفس الوتيرة:</p>
+          <ul>
+            <li><strong>المبيعات / الإنتاج:</strong> تقييم شهري (أرقام متغيرة سريعًا)</li>
+            <li><strong>الإداريون:</strong> تقييم ربع سنوي (مخرجات تراكمية)</li>
+          </ul>
+          <p style="margin-bottom:0"><strong style="color:#c53030">توحيد فترة التقييم ⇦ ظلم تشغيلي وتشوّه نتائج.</strong></p>
+        </div>
+        
+        <div class="alert-danger">
+          <strong>🟥 ما يجب عدم فعله</strong>
+          <ul style="margin-top:8px">
+            <li>"أشعر أنه ممتاز/ضعيف" دون دليل</li>
+            <li>التقييم بالذاكرة أو آخر موقف (تأثير الحداثة)</li>
+            <li>خلط التقييم بالعقوبة</li>
+            <li>إصدار نتيجة دون خطة تحسين</li>
+          </ul>
+        </div>
+        
+        <h3>🟨 القصة التطبيقية: قصة "المدير بالصدفة" والتسرب الوظيفي</h3>
+        
+        <div class="story-box">
+          <h4>🟨 قصة من واقع سوق العمل السعودي</h4>
+          <p>حالة إدارة استقال منها <strong>10 موظفين خلال 10 أشهر</strong>.</p>
+          
+          <p>بالتحليل، لم تكن المشكلة في الرواتب أو عبء العمل، بل في <strong>مدير بالصدفة:</strong></p>
+          <ul>
+            <li>لا يستخدم معايير واضحة</li>
+            <li>يتعامل بالمزاج والانطباع</li>
+            <li>يقيّم الأشخاص لا النتائج</li>
+            <li>لا يقدّم تغذية راجعة مفهومة</li>
+          </ul>
+          
+          <p><strong>النتيجة:</strong></p>
+          <ul>
+            <li>شعور عام بالظلم</li>
+            <li>فقدان الثقة</li>
+            <li>تسرب الكفاءات</li>
+          </ul>
+          
+          <p><strong>بعد تغيير المدير وتعيين مشرف قيادي يستخدم معايير واضحة:</strong><br>
+          استقر القسم <strong>3 سنوات كاملة</strong> دون تسرب يُذكر.</p>
+          
+          <div class="alert-danger" style="margin-top:12px">
+            <strong>🟥 الخطأ القاتل في القصة</strong><br>
+            تقييم انطباعي يقوده مدير غير مؤهّل للتقييم.
+          </div>
+          
+          <div class="success-box" style="margin-top:12px">
+            <h4>🟩 الدرس المركزي</h4>
+            <p style="margin:0"><strong>الناس لا تترك العمل… تترك التقييم الظالم.</strong></p>
+          </div>
+        </div>
+        
+        <h3>🟨 القصة التطبيقية: قصة "عبد العزيز" والجندي المجهول</h3>
+        
+        <div class="story-box">
+          <h4>🟨 قصة من واقع سوق العمل السعودي</h4>
+          <p>إدارة موارد بشرية تضم <strong>7 موظفين</strong> في شركة دهانات كبرى. كان الموظف <strong>"عبد العزيز"</strong> هو من يقوم بكافة الأعباء الفعلية، بينما يكتفي البقية بإسناد مهامهم إليه لثقتهم في إنجازه.</p>
+          
+          <p><strong>المفارقة في التقييم:</strong><br>
+          عند سؤال المدير عن أداء الفريق، وصف عبد العزيز بأنه <strong>"موظف عادي يحتاج لتطوير"</strong>، لأنه كان يفتقر لمهارة إبراز العمل ويشتغل بصمت بعيداً عن الأضواء.</p>
+          
+          <p><strong>نقطة التحول (صناعة الشواهد):</strong><br>
+          نصح المستشارُ الموظفَ بأن العمل بلا "تقرير" يجعله <strong>شبحاً غير مرئي (Ghost/Disappear)</strong> في نظر الإدارة. فقام عبد العزيز بحصر مهامه وقدم تقريراً لمديره يحتوي على <strong>72 بنداً</strong> من الإنجازات الجوهرية التي حققها خلال شهرين.</p>
+          
+          <p><strong>النتيجة الصادمة:</strong><br>
+          عندما طلب المدير من بقية الموظفين الستة تقديم تقارير مماثلة، لم يستطع أي منهم تدوين أكثر من <strong>3 أو 4 مهام بسيطة</strong>.</p>
+          
+          <p><strong>النتيجة والتحول الوظيفي:</strong><br>
+          بسبب هذا التوثيق، ترقى عبد العزيز ليصبح <strong>مشرفاً</strong>، ثم تدرج ليصل إلى منصب <strong>مدير موارد بشرية</strong> في المنشأة خلال <strong>ثلاث سنوات فقط</strong>.</p>
+          
+          <div class="success-box" style="margin-top:12px">
+            <h4>🟩 نقطة جوهرية: "البروباغندا المهنية"</h4>
+            <p>يجب على الموظف أن يكون <strong>إعلامياً عن نفسه</strong>؛ فصمت الإنجاز يؤدي لظلم التقييم.</p>
+            <p style="margin:0"><strong>التقرير الدوري ليس مجرد ورقة، بل هو الذي يفرض قيمة المرتب والمنصب.</strong></p>
+          </div>
+        </div>
+        
+        <h3>⚖️ سؤال القرار (Decision)</h3>
+        <div class="alert-danger">
+          <strong>🟥 سؤال يجب التوقف عنده</strong><br><br>
+          لو لم يقدم عبد العزيز تقرير الشواهد الموثقة، هل كان العيب سيكون في "أدائه" أم في "أداة التقييم" التي يستخدمها المدير؟ ولماذا؟
+        </div>
+        
+        <div style="background:#ddd6fe;border:2px solid #a78bfa;border-radius:12px;padding:14px;margin:12px 0;">
+          <h3 style="margin-top:0">🧠 سؤال التحقق المعرفي (KC Question)</h3>
+          <p>ما هو الدرس المستفاد من قصة عبد العزيز في سياق تقييم الأداء؟</p>
+          <ul style="list-style: none; padding-right: 0; margin-bottom:0">
+            <li><strong>A)</strong> العمل الشاق كافٍ للحصول على ترقية.</li>
+            <li><strong>B)</strong> المدير دائماً يعرف من يعمل ومن لا يعمل.</li>
+            <li><strong>C)</strong> التقييم العادل يحتاج إلى شواهد وإثباتات (Evidence) يشارك الموظف في توثيقها.</li>
+            <li><strong>D)</strong> تقليص عدد الموظفين يزيد الإنتاجية.</li>
+          </ul>
+        </div>
+        
+        <h3>✅ التغذية الراجعة الصحيحة</h3>
+        <div class="success-box">
+          <h4>الإجابة الصحيحة هي (C)</h4>
+          <p style="margin:0">لأن غياب التقارير (Reports) يجعل الموظف المتميز <strong>غير مرئي</strong>، ويحول التقييم إلى عملية انطباعية تخضع للنسيان أو التقدير الخاطئ.</p>
+        </div>
+        
+        <h3>🧠 التحليل المهني</h3>
+        
+        <div class="success-box">
+          <h4>🟩 خلاصة تحليلية</h4>
+          <p><strong>التقييم ليس:</strong></p>
+          <ul>
+            <li>ذوقًا</li>
+            <li>ولا خبرة شخصية</li>
+            <li>ولا سلطة منصب</li>
+          </ul>
+          <p style="margin-bottom:0"><strong>التقييم أداة قياس، وإذا فسدت الأداة ⇦ فسدت القرارات الناتجة عنها.</strong></p>
+        </div>
+        
+        <h3>⚖️ سؤال القرار (Decision)</h3>
+        <div class="alert-danger">
+          <strong>🟥 سؤال يجب التوقف عنده</strong><br><br>
+          هل يجوز بناء قرار إداري (ترقية/إنذار/إنهاء) على تقييم بلا معايير وشواهد؟ ولماذا؟
+        </div>
+        
+        <div style="background:#ddd6fe;border:2px solid #a78bfa;border-radius:12px;padding:14px;margin:12px 0;">
+          <h3 style="margin-top:0">🧠 سؤال التحقق المعرفي (KC Question)</h3>
+          <p>ما الشرط الأساسي الذي يجعل التقييم مهنيًا قابلًا للدفاع؟</p>
+          <ul style="list-style: none; padding-right: 0; margin-bottom:0">
+            <li><strong>A)</strong> خبرة المدير</li>
+            <li><strong>B)</strong> توقيت التقييم</li>
+            <li><strong>C)</strong> وجود معايير ومؤشرات وشواهد واضحة</li>
+            <li><strong>D)</strong> اتفاق الفريق على النتيجة</li>
+          </ul>
+        </div>
+        
+        <h3>✅ التغذية الراجعة الصحيحة</h3>
+        <div class="success-box">
+          <h4>🟩 الإجابة الصحيحة: (C)</h4>
+          <p><strong>بدون معايير وشواهد:</strong></p>
+          <ul style="margin-bottom:0">
+            <li>لا يمكن تفسير الدرجة</li>
+            <li>ولا الدفاع عنها</li>
+            <li>ولا ربطها بقرار عادل</li>
+          </ul>
+        </div>
+        
+        <div class="closing-box">
+          <h3>🟦 🏁 معيار الإتقان (Mastery)</h3>
+          <p class="muted" style="margin-top:-6px">إغلاق الوحدة — معيار الإتقان</p>
+          
+          <p style="margin-top:12px"><strong>🟦 يُعد المتدرّب متقنًا إذا استطاع:</strong></p>
+          <ul style="margin-bottom:0">
+            <li>شرح تقييم الأداء كقياس لا كرأي.</li>
+            <li>تعداد عناصر التقييم المهني (معايير/مؤشرات/شواهد/اتساق).</li>
+            <li>رفض أي قرار إداري مبني على تقييم انطباعي.</li>
+            <li>اقتراح تصحيح عملي لنظام تقييم غير عادل.</li>
+          </ul>
+        </div>
+      </section>
 
-    </section>
+      <!-- ===== INFOGRAPHIC ===== -->
+      <section class="card infographic" id="infographicSection">
+        <h2>📌 الإنفوجرافيك (Infographic)</h2>
+        <img id="infographicImg" src="" alt="Infographic">
+        <div class="muted" id="infographicFallback" style="display:none;margin-top:10px;"></div>
+      </section>
+
+      <!-- ===== SIGNATURE ===== -->
+      <div class="signature-box" id="signature">
+        <div class="signature-label">تم إعداد هذا المحتوى بواسطة</div>
+        <div class="signature-name">أنس العضيبي</div>
+        <div class="signature-contact">جوال: 0505530803</div>
+      </div>
+
+    </main>
+
   </div>
 
   <script>
-    /*****************************************************************
-     * Template Data Contract v1.0 (Inline Edition)
-     *
-     * mode: "days" | "modules"   => Tabs labels only
-     * tabs: [{ id, label, sections:[...] }]
-     *
-     * SECTION:
-     * - id, title
-     * - unitName: used for Infographic file: assets/<unitName>.png
-     * - badges: ["Required", ...] (optional)
-     * - steps: [ ... ] (optional)
-     * - bodyHtml: (required) you place inline callouts anywhere here
-     * - infographic: true/false (if true => appended LAST inside the unit)
-     *
-     * Inline callouts (use inside bodyHtml):
-     *  - <div class="callout callout-danger">...</div>
-     *  - <div class="callout callout-success">...</div>
-     *****************************************************************/
-
-    const TEMPLATE_DATA = {
-  "mode": "modules",
-  "title": "الوحدة الخامسة: التنظيم الداخلي والحوكمة الإدارية",
-  "subtitle": "",
-  "tabs": [
-    {
-      "id": "u5",
-      "label": "الوحدة الخامسة: التنظيم الداخلي والحوكمة الإدارية",
-      "sections": [
-        {
-          "id": "u5_main",
-          "title": "الوحدة الخامسة: التنظيم الداخلي والحوكمة الإدارية",
-          "unitName": "الوحدة_الخامسة",
-          "badges": [],
-          "steps": [],
-          "bodyHtml": "<div class=\"callout callout-info\">\n<div class=\"label\">Learning Objectives (Recap)</div>\n<ul>\n<li>فهم أثر التنظيم الداخلي على الاستقرار وتقليل النزاعات.</li>\n<li>إدراك دور الحوكمة في تقليل التسرب الوظيفي.</li>\n<li>ربط الهيكل والوصف الوظيفي بالأداء والمساءلة.</li>\n</ul></div>\n<h3 class=\"steps-title\">Core Content</h3>\n<p>التنظيم الداخلي هو خط الدفاع الأول. يبدأ بـ الهيكل التنظيمي لتحديد السلطة والمسؤولية ومنع التضارب.</p>\n<p>ثم لوائح تنظيم العمل ودليل الإجراءات لضبط الحقوق والواجبات ومسار الجزاءات.</p>\n<p>وأخيرًا الوصف الوظيفي كمرجع لحدود الدور وتقييم الأداء.</p>\n<h3 class=\"steps-title\">قصص تطبيقية وتوضيحية</h3><div class=\"callout callout-info\"><div class=\"label\">قصة إيجابية — أحمد والتحول الإداري</div><p><strong>النظام الذي استندت عليه:</strong> الحوكمة والتحول الرقمي</p><p><strong>القصة:</strong> شاب بدأ كسكرتير مؤقت في مكتب فوضوي، فقام بأرشفة الملفات إلكترونيًا وتنظيم الاجتماعات، مما أدى إلى ترقيته ورفع راتبه من 4 آلاف إلى 22 ألف ريال.</p><p><strong>ماذا نستفيد من القصة:</strong> المبادرة الفردية تصنع فارقًا مهنيًا كبيرًا.</p></div><div class=\"callout callout-danger\">\n<div class=\"label\">تنبيه — معلومات يجب الانتباه لها</div>\n<ul>\n<li>أي إجراء إداري/تقييم أداء دون لوائح ووصف وظيفي معتمد يضعف موقف المنشأة عند النزاع.</li>\n</ul></div>\n<div class=\"callout callout-success\">\n<div class=\"label\">تركيز — نقاط يجب التركيز عليها</div>\n<ul>\n<li>اعتماد الهيكل وتحديثه دوريًا.</li>\n<li>مواءمة الوصف مع الواقع لا المسميات.</li>\n<li>تأهيل القيادات قبل تمكينها.</li>\n</ul></div>\n<h3 class=\"steps-title\">Key Takeaways</h3>\n<ul>\n<li>التنظيم الداخلي دفاع أول قبل القضاء.</li>\n<li>الحوكمة تقلل النزاعات والتسرب.</li>\n<li>القيادة غير المؤهلة خطر عالي.</li>\n<li>الوصف الوظيفي أساس العدالة والاستدامة.</li>\n</ul>",
-          "infographic": true
-        }
-      ]
-    }
-  ]
-};
-
-    const elTitle = document.getElementById("appTitle");
-    const elSubtitle = document.getElementById("appSubtitle");
-    const elTOC = document.getElementById("sidebarTOC");
-    const elContent = document.getElementById("contentContainer");
-    const elInf = document.getElementById("infographicContainer");
-    document.getElementById("printBtn").addEventListener("click", () => window.print());
-
-    const sanitizeId = (id) => String(id).replace(/[^a-zA-Z0-9_-]/g, "_");
-
-    function renderApp(data){
-  elTitle.textContent = data.title || "";
-  elSubtitle.textContent = data.subtitle || "";
-  elSubtitle.style.display = (data.subtitle ? "block" : "none");
-  if (!data.subtitle) { elSubtitle.style.display = "none"; } else { elSubtitle.style.display = "block"; }
-  if (!elSubtitle.textContent.trim()) { elSubtitle.style.display = "none"; }
-  const tab = (data.tabs || [])[0];
-  if (tab){
-    renderContent(tab);
-  }
-  renderTOC();
-}
-
-    function renderTOC(){
-  elTOC.innerHTML = '<li><a href="index.html" >الوحدة الأولى: نظام العمل والهيكل القضائي العمالي</a></li><li><a href="unit2.html" >الوحدة الثانية: إدارة التعاقد والمدد النظامية</a></li><li><a href="unit3.html" >الوحدة الثالثة: الأجور، الاستحقاقات، وحسابات نهاية الخدمة</a></li><li><a href="unit4.html" >الوحدة الرابعة: العمليات الرقمية والمنصات الحكومية</a></li><li><a href="unit5.html" aria-current="page">الوحدة الخامسة: التنظيم الداخلي والحوكمة الإدارية</a></li><li><a href="unit6.html" >الوحدة السادسة: الانضباط الإداري وإدارة المخاطر العمالية</a></li>';
-}
-
-    function makeBadges(badges){
-      if (!badges || !badges.length) return null;
-      const wrap = document.createElement("div");
-      wrap.className = "badges";
-      badges.forEach(txt => {
-        const s = document.createElement("span");
-        s.className = "badge";
-        s.textContent = txt;
-        wrap.appendChild(s);
+    // Active link
+    (function(){
+      const file = (location.pathname.split('/').pop() || 'unit5.html');
+      document.querySelectorAll('#sidebarTOC .toc-link').forEach(a=>{
+        if(a.getAttribute('data-page') === file) a.classList.add('active');
       });
-      return wrap;
-    }
+    })();
 
-    function makeSteps(steps){
-      if (!steps || !steps.length) return null;
-      const title = document.createElement("div");
-      title.className = "steps-title";
-      title.textContent = "التسلسل المنهجي";
+    // Infographic resolver
+    (function(){
+      const file = decodeURIComponent((location.pathname.split('/').pop() || 'unit5.html'));
+      let base = file.replace(/\.html?$/i,'');
+      base = base.replace(/\s*\(\d+\)$/, '').trim();
+      const img = document.getElementById('infographicImg');
+      const fb  = document.getElementById('infographicFallback');
+      if(!img) return;
 
-      const ol = document.createElement("ol");
-      ol.className = "steps";
-      steps.forEach(s => {
-        const li = document.createElement("li");
-        li.textContent = s;
-        ol.appendChild(li);
-      });
-
-      const wrap = document.createElement("div");
-      wrap.appendChild(title);
-      wrap.appendChild(ol);
-      return wrap;
-    }
-
-    function makeInfographic(unitName){
-      const box = document.createElement("div");
-      box.className = "infographic";
-
-      const cap = document.createElement("div");
-      cap.className = "cap";
-      cap.textContent = "📌 الإنفوجرافيك (Infographic)";
-
-      const img = document.createElement("img");
-      img.alt = "Infographic — " + unitName;
-      img.src = "assets/" + unitName + ".png";
-
-      const hint = document.createElement("div");
-      hint.className = "hint";
-      hint.textContent = "الملف المطلوب: assets/" + unitName + ".png";
-
-      img.addEventListener("error", () => {
-        img.style.display = "none";
-        hint.textContent = "لم يتم العثور على الصورة: assets/" + unitName + ".png";
-      });
-
-      box.appendChild(cap);
-      box.appendChild(img);
-      box.appendChild(hint);
-      return box;
-    }
-
-    function renderContent(tab){
-      elContent.innerHTML = "";
-      (tab.sections || []).forEach(sec => {
-        const card = document.createElement("section");
-        card.className = "card";
-        card.id = sanitizeId(sec.id);
-
-        const h2 = document.createElement("h2");
-        h2.textContent = sec.title;
-        card.appendChild(h2);
-
-        const badges = makeBadges(sec.badges);
-        if (badges) card.appendChild(badges);
-
-        // bodyHtml (Inline callouts live here)
-        const body = document.createElement("div");
-        body.innerHTML = sec.bodyHtml || "";
-        card.appendChild(body);
-
-        // steps (optional)
-        const steps = makeSteps(sec.steps);
-        if (steps) card.appendChild(steps);
-
-        elContent.appendChild(card);
-      });
-
-      // Infographic section (fixed: before signature)
-      const first = (tab.sections || [])[0] || {};
-      const unit = first.unitName || sanitizeId(first.id || tab.id || 'unit');
-      elInf.innerHTML = '';
-      const infCard = document.createElement('section');
-      infCard.className = 'card';
-      infCard.appendChild(makeInfographic(unit));
-      elInf.appendChild(infCard);
-
-    }
-
-
-    renderApp(TEMPLATE_DATA);
+      const path = `assets/${base}.png`;
+      img.src = path;
+      img.onerror = function(){
+        img.style.display = 'none';
+        fb.style.display = 'block';
+        fb.textContent = `لم يتم العثور على ملف الإنفوجرافيك: ${path}`;
+      };
+    })();
   </script>
 </body>
 </html>
