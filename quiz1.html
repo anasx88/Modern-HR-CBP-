@@ -311,7 +311,7 @@
 <body>
   <div class="page">
 
-    <!-- ===== SIDEBAR (مثبت في اليمين) ===== -->
+    <!-- ===== SIDEBAR ===== -->
     <aside class="sidebar" aria-label="Sidebar">
       <h3>الوحدات</h3>
       <nav id="sidebarTOC">
@@ -374,7 +374,7 @@
       });
     })();
 
-    // Shuffle function
+    // Shuffle function for arrays
     function shuffleArray(array) {
       const newArray = [...array];
       for (let i = newArray.length - 1; i > 0; i--) {
@@ -1083,6 +1083,7 @@
       }
     ];
 
+
     // Shuffle questions
     const shuffledQuizData = shuffleArray(quizData);
 
@@ -1102,19 +1103,50 @@
       qCard.className = 'question-card';
       qCard.id = `question-${index}`;
       
-      // Shuffle options
-      const optionKeys = Object.keys(q.options);
-      const shuffledKeys = shuffleArray(optionKeys);
+      // Shuffle option values but keep keys fixed (A, B, C, D)
+      const optionEntries = Object.entries(q.options); // [[A, text], [B, text], ...]
+      const shuffledValues = shuffleArray(optionEntries.map(e => e[1])); // shuffle texts only
+      const keys = ['A', 'B', 'C', 'D'];
       
+      // Create new mapping with fixed keys but shuffled values
+      const shuffledOptions = {};
+      keys.forEach((key, i) => {
+        shuffledOptions[key] = shuffledValues[i];
+      });
+      
+      // Find which key now has the correct answer
+      let newCorrectKey = '';
+      Object.entries(shuffledOptions).forEach(([key, value]) => {
+        if (value === q.options[q.correct]) {
+          newCorrectKey = key;
+        }
+      });
+      
+      // Build options HTML with fixed letters
       let optionsHTML = '';
-      shuffledKeys.forEach(key => {
+      keys.forEach(key => {
         optionsHTML += `
           <label class="option-label" data-question="${index}" data-option="${key}">
             <input type="radio" name="q${index}" value="${key}">
-            <span class="option-text"><strong>${key})</strong> ${q.options[key]}</span>
+            <span class="option-text"><strong>${key})</strong> ${shuffledOptions[key]}</span>
           </label>
         `;
       });
+      
+      // Store the shuffled mapping for grading
+      qCard.dataset.correctKey = newCorrectKey;
+      qCard.dataset.originalCorrect = q.correct;
+      
+      // Store shuffled mapping for whyWrong
+      const whyWrongMapping = {};
+      Object.entries(shuffledOptions).forEach(([newKey, value]) => {
+        // Find original key for this value
+        const originalKey = Object.entries(q.options).find(([k, v]) => v === value)[0];
+        whyWrongMapping[newKey] = q.whyWrong[originalKey];
+      });
+      qCard.dataset.whyWrong = JSON.stringify(whyWrongMapping);
+      qCard.dataset.unit = q.unit;
+      qCard.dataset.unitName = q.unitName;
       
       qCard.innerHTML = `
         <div class="question-header">السؤال ${index + 1}</div>
@@ -1131,31 +1163,38 @@
       let score = 0;
       let answered = 0;
       
-      shuffledQuizData.forEach((q, index) => {
+      for (let index = 0; index < shuffledQuizData.length; index++) {
+        const qCard = document.getElementById(`question-${index}`);
         const selected = document.querySelector(`input[name="q${index}"]:checked`);
+        
         if (selected) {
           answered++;
           const userAnswer = selected.value;
+          const correctKey = qCard.dataset.correctKey;
+          const whyWrongMapping = JSON.parse(qCard.dataset.whyWrong);
+          const unit = qCard.dataset.unit;
+          const unitName = qCard.dataset.unitName;
+          
           const feedbackDiv = document.getElementById(`feedback-${index}`);
           const optionLabel = document.querySelector(`label[data-question="${index}"][data-option="${userAnswer}"]`);
           
-          if (userAnswer === q.correct) {
+          if (userAnswer === correctKey) {
             score++;
             feedbackDiv.className = 'feedback correct show';
             feedbackDiv.innerHTML = '<strong>✔️ إجابة صحيحة</strong>';
             optionLabel.classList.add('correct');
           } else {
             feedbackDiv.className = 'feedback incorrect show';
-            const whyWrongText = q.whyWrong[userAnswer] || 'هذه الإجابة غير صحيحة.';
+            const whyWrongText = whyWrongMapping[userAnswer] || 'هذه الإجابة غير صحيحة.';
             feedbackDiv.innerHTML = `
               <strong>❌ إجابة خاطئة</strong><br>
               <div style="margin-top:8px">${whyWrongText}</div>
-              <a href="${q.unit}" class="review-link">🔁 يجب مراجعة: ${q.unitName}</a>
+              <a href="${unit}" class="review-link">🔍 يجب مراجعة: ${unitName}</a>
             `;
             optionLabel.classList.add('incorrect');
           }
         }
-      });
+      }
       
       if (answered < shuffledQuizData.length) {
         alert('يرجى الإجابة على جميع الأسئلة قبل التسليم');
@@ -1181,4 +1220,4 @@
     });
   </script>
 </body>
-</html>
+</html> 
